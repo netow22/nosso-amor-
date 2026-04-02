@@ -3,126 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Minha Vida ❤️</title>
+    <title>Beca e Neto: Amor Eterno</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --roxo: #6a0dad;
+            --rosa-forte: #ff1493;
+            --rosa-claro: #fff5f8;
+            --branco: #ffffff;
+        }
+
         body {
-            margin: 0; padding: 0; background: #fff5f7;
-            font-family: 'Segoe UI', sans-serif; color: #4a0e0e;
-            display: flex; flex-direction: column; align-items: center;
+            background-color: var(--rosa-claro);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png');
+            overflow-x: hidden;
         }
 
-        /* Primeira Parte: A Carta */
-        .secao-texto {
-            width: 85%; max-width: 500px; background: white;
-            padding: 35px; margin: 40px 0; border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.3);
-            text-align: center; border: 1px solid #ffccd5;
+        /* Tela de Entrada */
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--roxo), var(--rosa-forte));
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 1000; color: white; transition: opacity 1s ease;
         }
 
-        h1 { color: #ff4d6d; font-size: 24px; }
-        .mensagem { font-size: 16px; line-height: 1.8; text-align: left; white-space: pre-wrap; margin-bottom: 20px; }
+        #playBtn {
+            background: white; color: var(--rosa-forte); border: none; padding: 20px 60px;
+            font-size: 1.8rem; border-radius: 50px; cursor: pointer;
+            font-family: 'Dancing Script', cursive; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        #playBtn:hover { transform: scale(1.1); }
+
+        header { text-align: center; padding: 60px 20px; background: var(--branco); border-bottom: 5px solid var(--rosa-claro); }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; color: var(--roxo); margin: 0; }
         
-        .texto-extra { font-style: italic; color: #ff758c; margin-top: 15px; border-top: 1px dashed #ffccd5; padding-top: 15px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; display: none; }
 
-        /* Botão de Play */
-        .btn-play {
-            background: #ff4d6d; color: white; border: none;
-            padding: 15px 40px; border-radius: 50px; font-size: 18px;
-            font-weight: bold; cursor: pointer; margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
-            display: flex; align-items: center; gap: 10px;
-            margin-left: auto; margin-right: auto;
+        /* Mensagens */
+        .card-texto {
+            background: var(--branco); padding: 40px; border-radius: 25px; margin-bottom: 50px;
+            border: 3px dashed var(--rosa-forte); position: relative; text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        /* Segunda Parte: As Fotos (Escondidas no começo) */
-        #galeria { display: none; width: 90%; max-width: 500px; margin-top: 20px; text-align: center; }
+        .card-texto::before { content: "🌸"; position: absolute; top: -20px; left: 20px; font-size: 2.5rem; }
+        .card-texto::after { content: "🌺"; position: absolute; bottom: -20px; right: 20px; font-size: 2.5rem; }
 
-        .frase-fotos { font-size: 20px; color: #ff4d6d; font-weight: bold; margin: 30px 0; }
+        .texto-principal { font-size: 1.3rem; line-height: 1.8; color: var(--roxo); font-style: italic; }
 
-        .mural { display: flex; flex-direction: column; gap: 25px; padding-bottom: 50px; }
-
-        .polaroid {
-            background: white; padding: 12px 12px 35px 12px;
-            border-radius: 2px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transform: rotate(-1.5deg); transition: 0.5s;
+        /* Galeria */
+        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; }
+        
+        .foto-item {
+            background: var(--branco); padding: 15px; border-radius: 5px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15); text-align: center;
+            border-bottom: 50px solid var(--branco); transition: 0.4s;
         }
-        .polaroid:nth-child(even) { transform: rotate(1.5deg); }
-        .polaroid img { width: 100%; height: auto; }
 
-        footer { padding: 40px; text-align: center; color: #ff4d6d; font-weight: bold; font-size: 20px; display: none; }
+        .foto-item:hover { transform: translateY(-15px) rotate(1deg); }
+        .foto-item img { width: 100%; height: 400px; object-fit: cover; border-radius: 3px; }
+        
+        .legenda-foto { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--rosa-forte); margin-top: 15px; }
+
+        footer { text-align: center; padding: 80px; font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--roxo); }
+
+        #youtube-player { position: absolute; top: -9999px; left: -9999px; }
     </style>
 </head>
 <body>
 
-    <div class="secao-texto" id="carta">
-        <h1>Minha Promessa para Você ❤️</h1>
-        <div class="mensagem">
-Mesmo com tudo que a gente vive, eu sei que não é fácil… principalmente por causa dos seus pais, que não aceitam o nosso namoro. Mas, mesmo assim, eu quero que você saiba que eu não vou desistir da gente.
+    <div id="youtube-player"></div>
 
-Eu posso até já ter errado, posso não ter sido perfeito, mas o que eu sinto por você é de verdade. E é por isso que eu tô disposto a mudar, melhorar e fazer tudo diferente, se for preciso… por nós dois.
-
-Eu não quero que a nossa história tenha um fim. Pelo contrário, eu quero continuar escrevendo ela com você, vivendo mais momentos, criando mais memórias e superando tudo que aparecer no nosso caminho.
-        </div>
-
-        <div class="texto-extra">
-            "Você é o meu refúgio em meio ao caos. Às vezes o mundo tenta nos separar, mas ele esquece que o que Deus uniu, ninguém tem o poder de desfazer. Cada obstáculo que enfrentamos hoje é apenas um degrau para o futuro que vamos construir juntos. Eu vejo uma vida inteira ao seu lado, e não importa o tempo que leve ou o quão difícil seja o caminho, eu estarei segurando a sua mão."
-        </div>
-
-        <button class="btn-play" onclick="comecarSurpresa()">
-            ▶️ Apertar para ver nossa história
-        </button>
-
-        <audio id="musica" preload="auto">
-            <source src="https://www.mboxdrive.com/Tyler,%20The%20Creator%20-%20I'll%20Take%20Care%20of%20You.mp3" type="audio/mpeg">
-        </audio>
+    <div id="overlay">
+        <h1 style="color: white; margin-bottom: 10px; font-family: 'Dancing Script';">Beca e Neto</h1>
+        <p style="color: white; margin-bottom: 40px; font-size: 1.2rem;">Nosso Amor Eterno 🌸</p>
+        <button id="playBtn">Surpresa para Você ❤️</button>
     </div>
 
-    <div id="galeria">
-        <div class="frase-fotos">
-            "Eu vivi tantos momentos incríveis com você, e o meu maior desejo é viver muito mais ainda..." ✨
+    <header>
+        <h1>Beca e Neto</h1>
+        <p>Lembro de cada momento dessas fotos para viver com você...</p>
+    </header>
+
+    <div class="container" id="conteudo">
+        
+        <div class="card-texto">
+            <p class="texto-principal">
+                "Você é o meu refúgio em meio ao caos. Às vezes o mundo tenta nos separar, mas ele esquece que o que Deus uniu, ninguém tem o poder de desfazer. Cada obstáculo que enfrentamos hoje é apenas um degrau para o futuro que vamos construir juntos. Eu vejo uma vida inteira ao seu lado."
+            </p>
         </div>
 
-        <div class="mural">
-            <div class="polaroid"><img src="https://i.ibb.co/SD9xC1Jb/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/PZcMBkSc/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/mVjhHDb2/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/rfH21f3j/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/Df5WVqYM/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/sv7BBvnT/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/6JF9qXBh/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/hFm9GSB9/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/0pMm65ZQ/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/ch49cz7c/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/kTTd74W/IMG.jpg"></div>
-            <div class="polaroid"><img src="https://i.ibb.co/B2t34P3z/IMG.jpg"></div>
+        <div class="galeria">
+            <div class="foto-item"><img src="https://i.ibb.co/Y45tbVcC/Y45tbVcC.png"><p class="legenda-foto">Quero viver muito mais você</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/ZRDKgR50/ZRDKgR50.png"><p class="legenda-foto">Lembro de cada momento</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/kvV3vKT/kvV3vKT.png"><p class="legenda-foto">Para viver com você</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/zHXckYgP/zHXckYgP.png"><p class="legenda-foto">Meu porto seguro</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/8gy0W39H/8gy0W39H.png"><p class="legenda-foto">Nosso jardim</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/m5LN0zrt/m5LN0zrt.png"><p class="legenda-foto">Minha vida</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/KpGKmG19/KpGKmG19.png"><p class="legenda-foto">Sempre juntos</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/TxxC1GVN/TxxC1GVN.png"><p class="legenda-foto">Nosso futuro</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/2Y8RHC4J/2Y8RHC4J.png"><p class="legenda-foto">Deus nos uniu</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/nqY1yVP6/nqY1yVP6.png"><p class="legenda-foto">Meu destino</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/mC8JCjmV/mC8JCjmV.png"><p class="legenda-foto">Meu tudo</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/twBbJNRt/twBbJNRt.png"><p class="legenda-foto">Amor infinito</p></div>
         </div>
 
-        <div class="secao-texto">
-            <p>"Que o nosso amor seja sempre maior que qualquer medo, e que a nossa vontade de estar junto vença qualquer distância ou desaprovação. Você é a minha escolha, hoje, amanhã e para sempre."</p>
+        <div class="card-texto" style="margin-top: 50px;">
+            <p class="texto-principal">
+                "Eu vivi tantos momentos incríveis com você, e o meu maior desejo é viver muito mais ainda... Lembro de cada momento dessas fotos para viver com você e quero viver muito mais você! 🌸🌷🌺"
+            </p>
         </div>
 
-        <footer id="final">
-            Eu te amo, e não vou desistir de você. 💖💍
-        </footer>
     </div>
 
+    <footer>
+        <p>Beca e Neto: Amor Eterno 🌺</p>
+    </footer>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        function comecarSurpresa() {
-            // Toca a música e pula para o refrão
-            const audio = document.getElementById('musica');
-            audio.currentTime = 24;
-            audio.play();
+        var player;
+        var videoId = 'Dwsd8SePKOs'; 
 
-            // Esconde o botão e mostra as fotos
-            document.querySelector('.btn-play').style.display = 'none';
-            document.getElementById('galeria').style.display = 'block';
-            document.getElementById('final').style.display = 'block';
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0', width: '0', videoId: videoId,
+                playerVars: { 
+                    'autoplay': 0, 
+                    'loop': 1, 
+                    'playlist': videoId, 
+                    'controls': 0,
+                    'start': 24 // Inicia a música aos 24 segundos (refrão)
+                },
+                events: { 'onReady': onPlayerReady }
+            });
+        }
 
-            // Rola a tela suavemente para as fotos
-            window.scrollTo({ top: document.getElementById('galeria').offsetTop, behavior: 'smooth' });
+        function onPlayerReady(event) {
+            document.getElementById('playBtn').addEventListener('click', function() {
+                player.playVideo();
+                document.getElementById('overlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('overlay').style.display = 'none';
+                    document.getElementById('conteudo').style.display = 'block';
+                }, 1000);
+            });
         }
     </script>
-
 </body>
 </html>
 
