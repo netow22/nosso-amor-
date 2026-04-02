@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --roxo: #6a0dad;
-            --rosa-forte: #ff1493;
-            --rosa-claro: #fff5f8;
+            --roxo-escuro: #4b0082;
+            --roxo-principal: #6a0dad;
+            --roxo-claro: #f3e5f5;
             --branco: #ffffff;
         }
 
         body {
-            background-color: var(--rosa-claro);
+            background-color: var(--roxo-claro);
             font-family: 'Poppins', sans-serif;
             margin: 0;
             background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png');
@@ -24,52 +24,46 @@
         /* Tela de Entrada */
         #overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, var(--roxo), var(--rosa-forte));
+            background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo-principal));
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             z-index: 1000; color: white; transition: opacity 1s ease;
         }
 
         #playBtn {
-            background: white; color: var(--rosa-forte); border: none; padding: 20px 60px;
+            background: var(--branco); color: var(--roxo-principal); border: none; padding: 20px 60px;
             font-size: 1.8rem; border-radius: 50px; cursor: pointer;
             font-family: 'Dancing Script', cursive; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: all 0.3s;
         }
 
-        #playBtn:hover { transform: scale(1.1); }
-
-        header { text-align: center; padding: 60px 20px; background: var(--branco); border-bottom: 5px solid var(--rosa-claro); }
-        h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; color: var(--roxo); margin: 0; }
+        header { text-align: center; padding: 60px 20px; background: var(--branco); border-bottom: 5px solid var(--roxo-principal); }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; color: var(--roxo-principal); margin: 0; }
         
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; display: none; }
 
-        /* Mensagens */
         .card-texto {
-            background: var(--branco); padding: 40px; border-radius: 25px; margin-bottom: 50px;
-            border: 3px dashed var(--rosa-forte); position: relative; text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            background: var(--branco); padding: 40px; border-radius: 25px; margin-bottom: 40px;
+            border: 3px solid var(--roxo-principal); position: relative; text-align: center;
+            box-shadow: 0 10px 20px rgba(106, 13, 173, 0.1);
         }
 
-        .card-texto::before { content: "🌸"; position: absolute; top: -20px; left: 20px; font-size: 2.5rem; }
-        .card-texto::after { content: "🌺"; position: absolute; bottom: -20px; right: 20px; font-size: 2.5rem; }
+        .card-texto::before { content: "💜"; position: absolute; top: 15px; left: 15px; font-size: 1.5rem; }
+        .card-texto::after { content: "💜"; position: absolute; bottom: 15px; right: 15px; font-size: 1.5rem; }
 
-        .texto-principal { font-size: 1.3rem; line-height: 1.8; color: var(--roxo); font-style: italic; }
+        .texto-principal { font-size: 1.2rem; line-height: 1.8; color: var(--roxo-escuro); font-style: italic; }
 
-        /* Galeria */
-        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; }
+        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
         .foto-item {
             background: var(--branco); padding: 15px; border-radius: 5px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15); text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center;
             border-bottom: 50px solid var(--branco); transition: 0.4s;
         }
 
-        .foto-item:hover { transform: translateY(-15px) rotate(1deg); }
-        .foto-item img { width: 100%; height: 400px; object-fit: cover; border-radius: 3px; }
-        
-        .legenda-foto { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--rosa-forte); margin-top: 15px; }
+        .foto-item img { width: 100%; height: 380px; object-fit: cover; border-radius: 3px; border: 1px solid #ddd; }
+        .legenda-foto { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--roxo-principal); margin-top: 12px; }
 
-        footer { text-align: center; padding: 80px; font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--roxo); }
+        footer { text-align: center; padding: 60px; font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--roxo-principal); }
 
         #youtube-player { position: absolute; top: -9999px; left: -9999px; }
     </style>
@@ -80,48 +74,54 @@
 
     <div id="overlay">
         <h1 style="color: white; margin-bottom: 10px; font-family: 'Dancing Script';">Beca e Neto</h1>
-        <p style="color: white; margin-bottom: 40px; font-size: 1.2rem;">Nosso Amor Eterno 🌸</p>
-        <button id="playBtn">Surpresa para Você ❤️</button>
+        <p style="color: white; margin-bottom: 40px; font-size: 1.2rem;">Sempre Juntos 💜</p>
+        <button id="playBtn">Tocar Nossa Música ❤️</button>
     </div>
 
     <header>
         <h1>Beca e Neto</h1>
-        <p>Lembro de cada momento dessas fotos para viver com você...</p>
+        <p style="color: var(--roxo-principal);">Nosso jardim de memórias eternas</p>
     </header>
 
     <div class="container" id="conteudo">
         
         <div class="card-texto">
             <p class="texto-principal">
-                "Você é o meu refúgio em meio ao caos. Às vezes o mundo tenta nos separar, mas ele esquece que o que Deus uniu, ninguém tem o poder de desfazer. Cada obstáculo que enfrentamos hoje é apenas um degrau para o futuro que vamos construir juntos. Eu vejo uma vida inteira ao seu lado."
+                "Saiba que eu te amoo dms de vdd mesmo 💕 queria pedir desculpas pelos meus erros e minha atitudes, mas prometo mudar cada vez pra melhor pela grta que amo! eu sei que brigamos,erramos mais sempre estamos juntos."
             </p>
         </div>
 
         <div class="galeria">
-            <div class="foto-item"><img src="https://i.ibb.co/Y45tbVcC/Y45tbVcC.png"><p class="legenda-foto">Quero viver muito mais você</p></div>
-            <div class="foto-item"><img src="https://i.ibb.co/ZRDKgR50/ZRDKgR50.png"><p class="legenda-foto">Lembro de cada momento</p></div>
-            <div class="foto-item"><img src="https://i.ibb.co/kvV3vKT/kvV3vKT.png"><p class="legenda-foto">Para viver com você</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/Y45tbVcC/Y45tbVcC.png"><p class="legenda-foto">Viver muito mais você</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/ZRDKgR50/ZRDKgR50.png"><p class="legenda-foto">Nosso brilho único</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/kvV3vKT/kvV3vKT.png"><p class="legenda-foto">Para sempre nós</p></div>
             <div class="foto-item"><img src="https://i.ibb.co/zHXckYgP/zHXckYgP.png"><p class="legenda-foto">Meu porto seguro</p></div>
-            <div class="foto-item"><img src="https://i.ibb.co/8gy0W39H/8gy0W39H.png"><p class="legenda-foto">Nosso jardim</p></div>
-            <div class="foto-item"><img src="https://i.ibb.co/m5LN0zrt/m5LN0zrt.png"><p class="legenda-foto">Minha vida</p></div>
-            <div class="foto-item"><img src="https://i.ibb.co/KpGKmG19/KpGKmG19.png"><p class="legenda-foto">Sempre juntos</p></div>
-            <div class="foto-item"><img src="https://i.ibb.co/TxxC1GVN/TxxC1GVN.png"><p class="legenda-foto">Nosso futuro</p></div>
-            <div class="foto-item"><img src="https://i.ibb.co/2Y8RHC4J/2Y8RHC4J.png"><p class="legenda-foto">Deus nos uniu</p></div>
-            <div class="foto-item"><img src="https://i.ibb.co/nqY1yVP6/nqY1yVP6.png"><p class="legenda-foto">Meu destino</p></div>
-            <div class="foto-item"><img src="https://i.ibb.co/mC8JCjmV/mC8JCjmV.png"><p class="legenda-foto">Meu tudo</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/8gy0W39H/8gy0W39H.png"><p class="legenda-foto">Florescendo juntos</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/m5LN0zrt/m5LN0zrt.png"><p class="legenda-foto">Minha vida é você</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/KpGKmG19/KpGKmG19.png"><p class="legenda-foto">Eternidade ao seu lado</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/TxxC1GVN/TxxC1GVN.png"><p class="legenda-foto">Cada segundo importa</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/2Y8RHC4J/2Y8RHC4J.png"><p class="legenda-foto">Felicidade plena</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/nqY1yVP6/nqY1yVP6.png"><p class="legenda-foto">Destino traçado por Deus</p></div>
+            <div class="foto-item"><img src="https://i.ibb.co/mC8JCjmV/mC8JCjmV.png"><p class="legenda-foto">Meu tudo, hoje e sempre</p></div>
             <div class="foto-item"><img src="https://i.ibb.co/twBbJNRt/twBbJNRt.png"><p class="legenda-foto">Amor infinito</p></div>
         </div>
 
-        <div class="card-texto" style="margin-top: 50px;">
+        <div class="card-texto" style="margin-top: 50px; background: #fff;">
             <p class="texto-principal">
-                "Eu vivi tantos momentos incríveis com você, e o meu maior desejo é viver muito mais ainda... Lembro de cada momento dessas fotos para viver com você e quero viver muito mais você! 🌸🌷🌺"
+                "Não consigo viver mais sem você não 🥲, uma pessoa que já faz parte da minha vida e do meu dia a dia, a melhor hora do meu dia é quando estamos conversando e também me sinto tão bem qnd te vejo e ficamos juntos slk... e que daqui em diante poderemos viver mais coisas juntos e repetir essa data por mais e mais vezes. VOCÊ É O AMOR DA MINHA VIDAA 🥹🫶🏼"
+            </p>
+        </div>
+
+        <div class="card-texto" style="border-style: dashed;">
+            <p class="texto-principal" style="font-weight: 600;">
+                "Amoor, quero realmente fazer de tudo para que seja você. Estou vivendo um sonho em ter uma menina como você ao meu lado. Quero muito casar com vc e ter uma família unida. Estamos passando nossa adolescência vivendo juntos e vamos viver assim pra sempre. Um beijão do Netinho, eu te amoo Beca 💕🫶🏽"
             </p>
         </div>
 
     </div>
 
     <footer>
-        <p>Beca e Neto: Amor Eterno 🌺</p>
+        <p>Beca e Neto: Amor Eterno 💜</p>
     </footer>
 
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -132,13 +132,7 @@
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '0', width: '0', videoId: videoId,
-                playerVars: { 
-                    'autoplay': 0, 
-                    'loop': 1, 
-                    'playlist': videoId, 
-                    'controls': 0,
-                    'start': 24 // Inicia a música aos 24 segundos (refrão)
-                },
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': videoId, 'controls': 0, 'start': 24 },
                 events: { 'onReady': onPlayerReady }
             });
         }
@@ -156,4 +150,5 @@
     </script>
 </body>
 </html>
+
 
