@@ -3,69 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beca e Neto: Amor Eterno</title>
+    <title>Beca e Neto: Nosso Jardim Eterno</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --roxo-escuro: #4b0082;
-            --roxo-principal: #6a0dad;
-            --roxo-claro: #f3e5f5;
+            /* Paleta de Cores Vibrantes e Felizes (Roxo, Azul, Rosa) */
+            --degrade-roxo: #8a2be2; /* Violeta Vibrante */
+            --degrade-azul: #00bfff; /* Deep Sky Blue */
+            --degrade-rosa: #ff69b4; /* Rosa Chiclete */
+            --violeta-vibrante: #8a2be2; /* Violeta para detalhes principais */
+            --violeta-glow: #e0b0ff; /* Violeta Suave para Glow */
+            --fundo-rosa-claro: #fff5f8; /* Rosa Bebê super claro */
             --branco: #ffffff;
+            --preto-suave: #333333;
+            --dourado-brilhante: #ffd700; /* Ouro */
         }
 
         body {
-            background-color: var(--roxo-claro);
+            background-color: var(--fundo-rosa-claro);
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png');
             overflow-x: hidden;
+            background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png'); /* Textura floral branca suave */
         }
 
-        /* Tela de Entrada */
+        /* TELA DE ENTRADA (Misteriosa e Bela com Degradê Vivo e Movimento) */
         #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, var(--roxo-escuro), var(--roxo-principal));
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 1000; color: white; transition: opacity 1s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Degradê Suave Roxo, Azul e Rosa com Movimento */
+            background: linear-gradient(135deg, var(--degrade-roxo), var(--degrade-azul), var(--degrade-rosa));
+            background-size: 400% 400%; /* Para animação */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            transition: opacity 1.5s ease; /* Transição suave de fade out */
+            animation: gradientAnimation 15s ease infinite; /* Animação de degradê */
         }
 
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Título da Tela Inicial em Caligrafia Dourada Brilhante */
+        #titulo-overlay {
+            font-family: 'Dancing Script', cursive;
+            font-size: 6rem;
+            color: var(--branco); /* Branco para contraste, mas animado para Dourado */
+            margin: 0;
+            text-shadow: 0 0 10px var(--dourado-brilhante), 0 0 20px var(--dourado-brilhante);
+            animation: glowAnimation 1.5s ease-in-out infinite;
+        }
+
+        @keyframes glowAnimation {
+            0% { text-shadow: 0 0 10px var(--dourado-brilhante), 0 0 20px var(--dourado-brilhante); }
+            50% { text-shadow: 0 0 15px var(--branco), 0 0 25px var(--dourado-brilhante); }
+            100% { text-shadow: 0 0 10px var(--dourado-brilhante), 0 0 20px var(--dourado-brilhante); }
+        }
+
+        /* Frase Amor Infinito na Tela Inicial */
+        #amor-infinito-overlay {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--branco);
+            margin: 10px 0 60px 0;
+            text-shadow: 0 0 5px var(--dourado-brilhante);
+        }
+
+        /* BOTÃO MISTERIOSO E BELO (Pulse e Glow) */
         #playBtn {
-            background: var(--branco); color: var(--roxo-principal); border: none; padding: 20px 60px;
-            font-size: 1.8rem; border-radius: 50px; cursor: pointer;
-            font-family: 'Dancing Script', cursive; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: all 0.3s;
+            background: var(--branco);
+            color: var(--violeta-vibrante);
+            border: none;
+            padding: 25px 70px;
+            font-size: 1.8rem;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif; /* Poppins para o texto do botão */
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            text-transform: capitalize;
+            letter-spacing: 1px;
+            animation: buttonPulse 2s infinite; /* Efeito de Pulse */
         }
 
-        header { text-align: center; padding: 60px 20px; background: var(--branco); border-bottom: 5px solid var(--roxo-principal); }
-        h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; color: var(--roxo-principal); margin: 0; }
-        
-        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; display: none; }
+        #playBtn:hover {
+            transform: scale(1.1);
+            background: var(--violeta-vibrante);
+            color: var(--branco);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4), 0 0 30px var(--degrade-azul), 0 0 60px var(--degrade-rosa); /* Brilho Rosa, Azul, Roxo no Hover */
+        }
 
+        @keyframes buttonPulse {
+            0% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6), 0 0 15px var(--degrade-azul); }
+            100% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        }
+
+        /* CABEÇALHO PRINCIPAL DO SITE (Surgindo Após o Play) */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 5px solid var(--rosa-claro);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: var(--violeta-vibrante);
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* CONTEÚDO DO SITE (Ficado Leve e Belo com Efeitos Suaves) */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: none; /* Escondido até o play */
+        }
+
+        /* Cards de Texto Leves e Belos */
         .card-texto {
-            background: var(--branco); padding: 40px; border-radius: 25px; margin-bottom: 40px;
-            border: 3px solid var(--roxo-principal); position: relative; text-align: center;
-            box-shadow: 0 10px 20px rgba(106, 13, 173, 0.1);
+            background: var(--branco);
+            padding: 50px;
+            border-radius: 30px;
+            margin-bottom: 60px;
+            border: 2px solid var(--violeta-glow); /* Borda Violeta Suave */
+            position: relative;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
-        .card-texto::before { content: "💜"; position: absolute; top: 15px; left: 15px; font-size: 1.5rem; }
-        .card-texto::after { content: "💜"; position: absolute; bottom: 15px; right: 15px; font-size: 1.5rem; }
+        .card-texto::before, .card-texto::after {
+            content: "🌸";
+            font-size: 2.5rem;
+            position: absolute;
+            color: var(--degrade-rosa); /* Rosa para detalhes */
+        }
+        .card-texto::before { top: 15px; left: 15px; }
+        .card-texto::after { bottom: 15px; right: 15px; }
 
-        .texto-principal { font-size: 1.2rem; line-height: 1.8; color: var(--roxo-escuro); font-style: italic; }
+        .texto-principal {
+            font-size: 1.4rem;
+            line-height: 1.9;
+            color: var(--preto-suave);
+            font-style: italic;
+        }
 
-        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        
+        /* GALERIA ESTILO POLAROID COM EFEITO DE BRILHO (Glow) */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
         .foto-item {
-            background: var(--branco); padding: 15px; border-radius: 5px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center;
-            border-bottom: 50px solid var(--branco); transition: 0.4s;
+            background: var(--branco);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            text-align: center;
+            border-bottom: 70px solid var(--branco); /* Estilo Polaroid */
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .foto-item img { width: 100%; height: 380px; object-fit: cover; border-radius: 3px; border: 1px solid #ddd; }
-        .legenda-foto { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--roxo-principal); margin-top: 12px; }
+        /* Efeito de Brilho (Glow) Rosa, Roxo e Azul no Hover */
+        .foto-item:hover {
+            transform: translateY(-15px) rotate(1deg);
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.8), 0 0 50px rgba(138, 43, 226, 0.5), 0 0 75px rgba(0, 191, 255, 0.3); /* Brilho Rosa, Roxo, Azul */
+        }
 
-        footer { text-align: center; padding: 60px; font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--roxo-principal); }
+        .foto-item img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
+        }
 
-        #youtube-player { position: absolute; top: -9999px; left: -9999px; }
+        .legenda-foto {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.7rem;
+            color: var(--violeta-vibrante);
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* Card de Texto Final - Destaque Especial */
+        #texto-final-card {
+            border: 4px solid var(--violeta-vibrante);
+            background: rgba(255, 245, 248, 0.9); /* Rosa Bebê Fundo */
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.15);
+        }
+
+        footer {
+            text-align: center;
+            padding: 100px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--violeta-vibrante);
+        }
+
+        /* Player YouTube Oculto */
+        #youtube-player {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
     </style>
 </head>
 <body>
@@ -73,21 +230,24 @@
     <div id="youtube-player"></div>
 
     <div id="overlay">
-        <h1 style="color: white; margin-bottom: 10px; font-family: 'Dancing Script';">Beca e Neto</h1>
-        <p style="color: white; margin-bottom: 40px; font-size: 1.2rem;">Sempre Juntos 💜</p>
-        <button id="playBtn">Tocar Nossa Música ❤️</button>
+        <h1 id="titulo-overlay">Beca e Neto</h1>
+        <p id="amor-infinito-overlay">Amor Infinito 🌸💜</p>
+        <button id="playBtn">Eu Te Amo Demais, Meu Amor ❤️💎</button>
     </div>
 
     <header>
-        <h1>Beca e Neto</h1>
-        <p style="color: var(--roxo-principal);">Nosso jardim de memórias eternas</p>
+        <h1>Nosso Jardim Eterno 🌸</h1>
+        <p style="color: var(--violeta-vibrante); font-size: 1.1rem; margin-top: 10px;">Uma celebração do nosso amor diário</p>
     </header>
 
     <div class="container" id="conteudo">
         
         <div class="card-texto">
             <p class="texto-principal">
-                "Saiba que eu te amoo dms de vdd mesmo 💕 queria pedir desculpas pelos meus erros e minha atitudes, mas prometo mudar cada vez pra melhor pela grta que amo! eu sei que brigamos,erramos mais sempre estamos juntos."
+                "Saiba que eu te amoo dms de vdd mesmo 💕 Estou vivendo um sonho ao ter uma menina como você ao meu lado. Não consigo viver mais sem você não, uma pessoa que já faz parte da minha vida e do meu dia a dia de uma forma inexplicável."
+            </p>
+            <p class="texto-principal" style="font-weight: 600; color: var(--degrade-rosa); margin-top: 10px;">
+                "Lembro de cada momento dessas fotos para viver com você..."
             </p>
         </div>
 
@@ -106,22 +266,28 @@
             <div class="foto-item"><img src="https://i.ibb.co/twBbJNRt/twBbJNRt.png"><p class="legenda-foto">Amor infinito</p></div>
         </div>
 
-        <div class="card-texto" style="margin-top: 50px; background: #fff;">
+        <div class="card-texto" style="margin-top: 60px;">
             <p class="texto-principal">
-                "Não consigo viver mais sem você não 🥲, uma pessoa que já faz parte da minha vida e do meu dia a dia, a melhor hora do meu dia é quando estamos conversando e também me sinto tão bem qnd te vejo e ficamos juntos slk... e que daqui em diante poderemos viver mais coisas juntos e repetir essa data por mais e mais vezes. VOCÊ É O AMOR DA MINHA VIDAA 🥹🫶🏼"
+                "A melhor hora do meu dia é quando estamos conversando, e me sinto tão bem qnd te vejo e ficamos juntos slk... me sinto tão bem com você! Quero muito casar com vc e ter uma família unida. Estamos passando nossa adolescência vivendo juntos e vamos viver assim pra sempre."
             </p>
         </div>
 
-        <div class="card-texto" style="border-style: dashed;">
-            <p class="texto-principal" style="font-weight: 600;">
-                "Amoor, quero realmente fazer de tudo para que seja você. Estou vivendo um sonho em ter uma menina como você ao meu lado. Quero muito casar com vc e ter uma família unida. Estamos passando nossa adolescência vivendo juntos e vamos viver assim pra sempre. Um beijão do Netinho, eu te amoo Beca 💕🫶🏽"
+        <div class="card-texto" id="texto-final-card" style="border-style: solid; border-width: 3px;">
+            <p class="texto-principal" style="font-weight: 600; color: var(--preto-suave);">
+                "Amoor, queria pedir desculpas pelos meus erros e minha atitudes, mas prometo mudar cada vez pra melhor pela grta que amo! eu sei que brigamos,erramos mais sempre estamos juntos. eu quero realmente fazer de tudo para que seja você, eu te amo demais meu amor, de verdade mesmo... eu te amoo becaa 💕🫶🏽"
+            </p>
+            <p class="texto-principal" style="font-weight: 700; color: var(--violeta-vibrante); margin-top: 15px; font-size: 1.5rem;">
+                "Lembro de cada momento dessas fotos para viver com você, e quero viver muito mais você! VOCÊ É O AMOR DA MINHA VIDAA 🥹🫶🏼"
+            </p>
+            <p class="texto-principal" style="font-style: normal; font-weight: 500; color: var(--degrade-rosa); margin-top: 10px;">
+                "Um beijão do Netinho, sempre cuidando de você."
             </p>
         </div>
 
     </div>
 
     <footer>
-        <p>Beca e Neto: Amor Eterno 💜</p>
+        <p>Beca e Neto: Amor Eterno 🌸💜💎</p>
     </footer>
 
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -129,26 +295,47 @@
         var player;
         var videoId = 'Dwsd8SePKOs'; 
 
+        // Função chamada quando a API do YouTube está pronta
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '0', width: '0', videoId: videoId,
-                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': videoId, 'controls': 0, 'start': 24 },
-                events: { 'onReady': onPlayerReady }
+                height: '0',
+                width: '0',
+                videoId: videoId,
+                playerVars: { 
+                    'autoplay': 0, // Não autoplay automático
+                    'controls': 0, // Sem controles
+                    'showinfo': 0, // Sem informações do vídeo
+                    'modestbranding': 1, // Logo do YouTube menor
+                    'loop': 1, // Tocar em loop
+                    'playlist': videoId, // Playlist ID necessária para o loop funcionar corretamente
+                    'start': 24 // Inicia a música exatamente aos 24 segundos (refrão)
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
             });
         }
 
         function onPlayerReady(event) {
+            // Quando a Beca clicar no botão "Eu Te Amo Demais, Meu Amor ❤️💎"
             document.getElementById('playBtn').addEventListener('click', function() {
+                // Toca a música a partir dos 24 segundos (refrão)
                 player.playVideo();
+                
+                // Suavemente esconde a tela de entrada (Transição de Fade Out)
                 document.getElementById('overlay').style.opacity = '0';
+                
+                // Exibe o conteúdo do site após a transição
                 setTimeout(() => {
                     document.getElementById('overlay').style.display = 'none';
                     document.getElementById('conteudo').style.display = 'block';
-                }, 1000);
+                }, 1500); // Sincronizado com a transição de opacity
             });
         }
     </script>
+
 </body>
 </html>
+
 
 
