@@ -7,222 +7,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta de Cores Vibrantes e Felizes (Roxo, Azul, Rosa) */
-            --degrade-roxo: #8a2be2; /* Violeta Vibrante */
-            --degrade-azul: #00bfff; /* Deep Sky Blue */
-            --degrade-rosa: #ff69b4; /* Rosa Chiclete */
-            --violeta-vibrante: #8a2be2; /* Violeta para detalhes principais */
-            --violeta-glow: #e0b0ff; /* Violeta Suave para Glow */
-            --fundo-rosa-claro: #fff5f8; /* Rosa Bebê super claro */
+            --roxo: #8a2be2;
+            --azul: #00bfff;
+            --rosa: #ff69b4;
             --branco: #ffffff;
-            --preto-suave: #333333;
-            --dourado-brilhante: #ffd700; /* Ouro */
+            --fundo: #fff5f8;
         }
 
         body {
-            background-color: var(--fundo-rosa-claro);
+            background-color: var(--fundo);
             font-family: 'Poppins', sans-serif;
             margin: 0;
             overflow-x: hidden;
-            background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png'); /* Textura floral branca suave */
+            background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png');
         }
 
-        /* TELA DE ENTRADA (Misteriosa e Bela com Degradê Vivo e Movimento) */
+        /* TELA DE ENTRADA MESTIÇA (ROXO, AZUL, ROSA) */
         #overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Degradê Suave Roxo, Azul e Rosa com Movimento */
-            background: linear-gradient(135deg, var(--degrade-roxo), var(--degrade-azul), var(--degrade-rosa));
-            background-size: 400% 400%; /* Para animação */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            color: white;
-            transition: opacity 1.5s ease; /* Transição suave de fade out */
-            animation: gradientAnimation 15s ease infinite; /* Animação de degradê */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--roxo), var(--azul), var(--rosa));
+            background-size: 400% 400%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 1000; color: white; transition: opacity 1.5s ease;
+            animation: moveGradient 10s ease infinite;
         }
 
-        @keyframes gradientAnimation {
+        @keyframes moveGradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Título da Tela Inicial em Caligrafia Dourada Brilhante */
-        #titulo-overlay {
-            font-family: 'Dancing Script', cursive;
-            font-size: 6rem;
-            color: var(--branco); /* Branco para contraste, mas animado para Dourado */
-            margin: 0;
-            text-shadow: 0 0 10px var(--dourado-brilhante), 0 0 20px var(--dourado-brilhante);
-            animation: glowAnimation 1.5s ease-in-out infinite;
-        }
+        #titulo-overlay { font-family: 'Dancing Script', cursive; font-size: 5rem; margin-bottom: 0; text-shadow: 0 0 15px rgba(255,255,255,0.6); }
+        #subtitulo-overlay { font-family: 'Dancing Script', cursive; font-size: 2.2rem; margin-bottom: 40px; }
 
-        @keyframes glowAnimation {
-            0% { text-shadow: 0 0 10px var(--dourado-brilhante), 0 0 20px var(--dourado-brilhante); }
-            50% { text-shadow: 0 0 15px var(--branco), 0 0 25px var(--dourado-brilhante); }
-            100% { text-shadow: 0 0 10px var(--dourado-brilhante), 0 0 20px var(--dourado-brilhante); }
-        }
-
-        /* Frase Amor Infinito na Tela Inicial */
-        #amor-infinito-overlay {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
-            color: var(--branco);
-            margin: 10px 0 60px 0;
-            text-shadow: 0 0 5px var(--dourado-brilhante);
-        }
-
-        /* BOTÃO MISTERIOSO E BELO (Pulse e Glow) */
         #playBtn {
-            background: var(--branco);
-            color: var(--violeta-vibrante);
-            border: none;
-            padding: 25px 70px;
-            font-size: 1.8rem;
-            border-radius: 60px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif; /* Poppins para o texto do botão */
-            font-weight: 600;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: all 0.4s ease;
-            text-transform: capitalize;
-            letter-spacing: 1px;
-            animation: buttonPulse 2s infinite; /* Efeito de Pulse */
+            background: var(--branco); color: var(--roxo); border: none; padding: 20px 50px;
+            font-size: 1.6rem; border-radius: 50px; cursor: pointer; font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.4s;
         }
 
-        #playBtn:hover {
-            transform: scale(1.1);
-            background: var(--violeta-vibrante);
-            color: var(--branco);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4), 0 0 30px var(--degrade-azul), 0 0 60px var(--degrade-rosa); /* Brilho Rosa, Azul, Roxo no Hover */
-        }
+        #playBtn:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--azul), 0 0 40px var(--rosa); }
 
-        @keyframes buttonPulse {
-            0% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-            50% { box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6), 0 0 15px var(--degrade-azul); }
-            100% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        }
+        header { text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.9); border-bottom: 4px solid var(--azul); }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; color: var(--roxo); margin: 0; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; display: none; }
 
-        /* CABEÇALHO PRINCIPAL DO SITE (Surgindo Após o Play) */
-        header {
-            text-align: center;
-            padding: 80px 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-bottom: 5px solid var(--rosa-claro);
-        }
-
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 5rem;
-            color: var(--violeta-vibrante);
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        /* CONTEÚDO DO SITE (Ficado Leve e Belo com Efeitos Suaves) */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            display: none; /* Escondido até o play */
-        }
-
-        /* Cards de Texto Leves e Belos */
         .card-texto {
-            background: var(--branco);
-            padding: 50px;
-            border-radius: 30px;
-            margin-bottom: 60px;
-            border: 2px solid var(--violeta-glow); /* Borda Violeta Suave */
-            position: relative;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            background: var(--branco); padding: 35px; border-radius: 25px; margin-bottom: 40px;
+            border: 2px solid #eee; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
 
-        .card-texto::before, .card-texto::after {
-            content: "🌸";
-            font-size: 2.5rem;
-            position: absolute;
-            color: var(--degrade-rosa); /* Rosa para detalhes */
-        }
-        .card-texto::before { top: 15px; left: 15px; }
-        .card-texto::after { bottom: 15px; right: 15px; }
-
-        .texto-principal {
-            font-size: 1.4rem;
-            line-height: 1.9;
-            color: var(--preto-suave);
-            font-style: italic;
+        /* BLOCO DE TEXTO ESPECIAL (O QUE VOCÊ MANDOU) */
+        .bloco-promessa {
+            border: 3px solid;
+            border-image: linear-gradient(to right, var(--roxo), var(--azul), var(--rosa)) 1;
+            padding: 40px; background: #fff; margin-top: 50px; border-radius: 10px;
         }
 
-        /* GALERIA ESTILO POLAROID COM EFEITO DE BRILHO (Glow) */
-        .galeria {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
+        .texto-principal { font-size: 1.15rem; line-height: 1.8; color: #444; font-style: italic; }
 
+        /* GALERIA POLAROID COM GLOW */
+        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .foto-item {
-            background: var(--branco);
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            text-align: center;
-            border-bottom: 70px solid var(--branco); /* Estilo Polaroid */
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
+            background: var(--branco); padding: 12px; border-bottom: 50px solid var(--branco);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1); transition: 0.5s; text-align: center;
         }
-
-        /* Efeito de Brilho (Glow) Rosa, Roxo e Azul no Hover */
         .foto-item:hover {
-            transform: translateY(-15px) rotate(1deg);
-            box-shadow: 0 0 25px rgba(255, 105, 180, 0.8), 0 0 50px rgba(138, 43, 226, 0.5), 0 0 75px rgba(0, 191, 255, 0.3); /* Brilho Rosa, Roxo, Azul */
+            transform: translateY(-10px);
+            box-shadow: 0 0 15px var(--rosa), 0 0 30px var(--azul);
         }
+        .foto-item img { width: 100%; height: 350px; object-fit: cover; }
+        .legenda-foto { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--roxo); margin-top: 10px; }
 
-        .foto-item img {
-            width: 100%;
-            height: 420px;
-            object-fit: cover;
-            border-radius: 2px;
-            display: block;
-        }
+        footer { text-align: center; padding: 80px; font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: var(--roxo); }
 
-        .legenda-foto {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.7rem;
-            color: var(--violeta-vibrante);
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        /* Card de Texto Final - Destaque Especial */
-        #texto-final-card {
-            border: 4px solid var(--violeta-vibrante);
-            background: rgba(255, 245, 248, 0.9); /* Rosa Bebê Fundo */
-            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.15);
-        }
-
-        footer {
-            text-align: center;
-            padding: 100px;
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
-            color: var(--violeta-vibrante);
-        }
-
-        /* Player YouTube Oculto */
-        #youtube-player {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
+        #youtube-player { position: absolute; top: -9999px; left: -9999px; }
     </style>
 </head>
 <body>
@@ -231,23 +92,19 @@
 
     <div id="overlay">
         <h1 id="titulo-overlay">Beca e Neto</h1>
-        <p id="amor-infinito-overlay">Amor Infinito 🌸💜</p>
+        <p id="subtitulo-overlay">Amor Infinito 🌸💜</p>
         <button id="playBtn">Eu Te Amo Demais, Meu Amor ❤️💎</button>
     </div>
 
     <header>
         <h1>Nosso Jardim Eterno 🌸</h1>
-        <p style="color: var(--violeta-vibrante); font-size: 1.1rem; margin-top: 10px;">Uma celebração do nosso amor diário</p>
     </header>
 
     <div class="container" id="conteudo">
         
         <div class="card-texto">
             <p class="texto-principal">
-                "Saiba que eu te amoo dms de vdd mesmo 💕 Estou vivendo um sonho ao ter uma menina como você ao meu lado. Não consigo viver mais sem você não, uma pessoa que já faz parte da minha vida e do meu dia a dia de uma forma inexplicável."
-            </p>
-            <p class="texto-principal" style="font-weight: 600; color: var(--degrade-rosa); margin-top: 10px;">
-                "Lembro de cada momento dessas fotos para viver com você..."
+                "Você é o meu refúgio e o meu sonho realizado. Saiba que eu te amo demais de verdade mesmo 💕 Lembro de cada momento dessas fotos para viver com você..."
             </p>
         </div>
 
@@ -266,21 +123,26 @@
             <div class="foto-item"><img src="https://i.ibb.co/twBbJNRt/twBbJNRt.png"><p class="legenda-foto">Amor infinito</p></div>
         </div>
 
-        <div class="card-texto" style="margin-top: 60px;">
-            <p class="texto-principal">
-                "A melhor hora do meu dia é quando estamos conversando, e me sinto tão bem qnd te vejo e ficamos juntos slk... me sinto tão bem com você! Quero muito casar com vc e ter uma família unida. Estamos passando nossa adolescência vivendo juntos e vamos viver assim pra sempre."
+        <div class="bloco-promessa">
+            <h2 style="font-family: 'Dancing Script'; color: var(--rosa); text-align: center; font-size: 2.5rem;">Nossa Promessa ❤️</h2>
+            <p class="texto-principal" style="font-style: normal; text-align: justify;">
+                Amor, eu te amo tanto, mas tanto mesmo, que eu faria de tudo pra ter você ao meu lado. Eu não consigo me imaginar sem você, porque você é o amor da minha vida. Eu quero continuar com você até onde Deus permitir, ou até onde você quiser… mas por mim, eu nunca vou te deixar.
+                <br><br>
+                Eu sonho com a gente construindo tudo juntos: casar, ter nossa família, nossa casa… eu sei que não é fácil, mas eu acredito de verdade que a gente consegue, juntos. Quero mostrar pro mundo que um amor de adolescência pode sim dar certo quando existe esforço dos dois lados.
+                <br><br>
+                Eu escolhi você pra minha vida. Eu não quero ninguém além de você, é só você que eu quero. E mesmo quando eu fico chateado, é porque às vezes eu sinto que você não valoriza tudo que eu faço, todo o amor e carinho que eu te dou… e isso me machuca. Mas mesmo assim, eu não desisto da gente.
+                <br><br>
+                Eu acredito que a gente pode melhorar, crescer juntos, aprender um com o outro. Eu sei que você tem capacidade, e eu também tenho. Me desculpa por todos os meus erros, por tudo que já te fez chorar ou te magoou. De verdade, me perdoa… eu quero ser uma pessoa melhor pra você.
+                <br><br>
+                Eu quero que a gente dê certo, que a gente evite brigas, que a gente se entenda mais. Porque acima de tudo isso… eu te amo demais. Isso que estamos passando é só uma fase, e eu sei que a gente vai superar.
+                <br><br>
+                Eu não posso te perder… você é o amor da minha vida. ❤️
             </p>
         </div>
 
-        <div class="card-texto" id="texto-final-card" style="border-style: solid; border-width: 3px;">
-            <p class="texto-principal" style="font-weight: 600; color: var(--preto-suave);">
-                "Amoor, queria pedir desculpas pelos meus erros e minha atitudes, mas prometo mudar cada vez pra melhor pela grta que amo! eu sei que brigamos,erramos mais sempre estamos juntos. eu quero realmente fazer de tudo para que seja você, eu te amo demais meu amor, de verdade mesmo... eu te amoo becaa 💕🫶🏽"
-            </p>
-            <p class="texto-principal" style="font-weight: 700; color: var(--violeta-vibrante); margin-top: 15px; font-size: 1.5rem;">
-                "Lembro de cada momento dessas fotos para viver com você, e quero viver muito mais você! VOCÊ É O AMOR DA MINHA VIDAA 🥹🫶🏼"
-            </p>
-            <p class="texto-principal" style="font-style: normal; font-weight: 500; color: var(--degrade-rosa); margin-top: 10px;">
-                "Um beijão do Netinho, sempre cuidando de você."
+        <div class="card-texto" style="margin-top: 40px;">
+            <p class="texto-principal">
+                "A melhor hora do meu dia é quando estamos conversando... Um beijão do Netinho, eu te amo Beca 💕🫶🏽"
             </p>
         </div>
 
@@ -294,48 +156,27 @@
     <script>
         var player;
         var videoId = 'Dwsd8SePKOs'; 
-
-        // Função chamada quando a API do YouTube está pronta
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                height: '0',
-                width: '0',
-                videoId: videoId,
-                playerVars: { 
-                    'autoplay': 0, // Não autoplay automático
-                    'controls': 0, // Sem controles
-                    'showinfo': 0, // Sem informações do vídeo
-                    'modestbranding': 1, // Logo do YouTube menor
-                    'loop': 1, // Tocar em loop
-                    'playlist': videoId, // Playlist ID necessária para o loop funcionar corretamente
-                    'start': 24 // Inicia a música exatamente aos 24 segundos (refrão)
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
+                height: '0', width: '0', videoId: videoId,
+                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': videoId, 'controls': 0, 'start': 24 },
+                events: { 'onReady': onPlayerReady }
             });
         }
-
         function onPlayerReady(event) {
-            // Quando a Beca clicar no botão "Eu Te Amo Demais, Meu Amor ❤️💎"
             document.getElementById('playBtn').addEventListener('click', function() {
-                // Toca a música a partir dos 24 segundos (refrão)
                 player.playVideo();
-                
-                // Suavemente esconde a tela de entrada (Transição de Fade Out)
                 document.getElementById('overlay').style.opacity = '0';
-                
-                // Exibe o conteúdo do site após a transição
                 setTimeout(() => {
                     document.getElementById('overlay').style.display = 'none';
                     document.getElementById('conteudo').style.display = 'block';
-                }, 1500); // Sincronizado com a transição de opacity
+                }, 1500);
             });
         }
     </script>
-
 </body>
 </html>
+
 
 
 
