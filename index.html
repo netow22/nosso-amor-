@@ -3,231 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beca e Neto: Amor Infinito</title>
+    <title>Beca e Neto: Nossa História</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        :root { --roxo: #8a2be2; --azul: #00bfff; --rosa: #ff1493; --marrom: #7a1b1b; --fundo: #ffffff; }
-        
-        body { background: var(--fundo); font-family: 'Poppins', sans-serif; margin: 0; overflow-x: hidden; color: #333; }
+        :root {
+            --roxo-universo: #1a0033;
+            --vinho-preto: linear-gradient(145deg, #4d0000, #1a0000); /* Vermelho misturado com preto */
+            --rosa-brilho: #ff1493;
+            --ouro: #ffd700;
+        }
 
-        /* TELA DE ENTRADA */
+        body { 
+            margin: 0; padding: 0; font-family: 'Poppins', sans-serif; 
+            background-color: var(--roxo-universo); color: white; overflow-x: hidden;
+        }
+
+        /* ESTRELAS NO FUNDO */
+        .star-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: radial-gradient(circle at center, #2e004f 0%, #000 100%);
+        }
+        .star {
+            position: absolute; background: white; border-radius: 50%;
+            opacity: 0.3; animation: blink var(--d) infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+
+        /* OVERLAY */
         #overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, var(--roxo), var(--azul), var(--rosa));
-            z-index: 5000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 1s;
+            background: linear-gradient(135deg, #4d0000, #2e004f);
+            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 1s;
         }
         #playBtn {
-            background: white; color: var(--rosa); border: none; padding: 18px 45px;
+            background: white; color: #4d0000; border: none; padding: 18px 45px;
             font-size: 1.6rem; border-radius: 50px; cursor: pointer; font-family: 'Dancing Script'; font-weight: bold;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
 
-        .container { display: none; padding: 20px; max-width: 600px; margin: 0 auto; }
+        .container { display: none; max-width: 500px; margin: 0 auto; padding: 20px; text-align: center; }
 
-        /* CAIXINHA DO CONTADOR BÁSICA E BONITA */
-        .contador-box {
-            background: #fff; padding: 25px; border-radius: 15px;
-            border: 1px solid #eee; box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-            margin: 20px auto 40px; text-align: center;
+        /* CONTADOR PROFISSIONAL (VERMELHO + PRETO) */
+        .caixa-contador {
+            background: var(--vinho-preto);
+            padding: 30px 15px; border-radius: 25px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            margin: 20px 0 40px;
         }
-        .contador-box h3 { font-family: 'Dancing Script'; font-size: 1.8rem; color: var(--roxo); margin-bottom: 15px; }
-        .timer-display { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .t-item { background: #fdfdfd; border: 1px solid #f0f0f0; padding: 8px; border-radius: 10px; min-width: 55px; }
-        .t-item span { display: block; font-size: 1.3rem; font-weight: 600; color: var(--rosa); }
-        .t-label { font-size: 0.7rem; color: #888; text-transform: uppercase; }
-
-        /* LIVRINHO (SWIPER) - ABAIXO DO CONTADOR */
-        .swiper { width: 100%; max-width: 300px; height: 450px; margin: 0 auto 40px; }
-        .swiper-slide { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 8px solid white; overflow: hidden; }
-        .swiper-slide img { width: 100%; height: 85%; object-fit: cover; border-radius: 5px; }
-        .legenda { font-family: 'Dancing Script'; font-size: 1.2rem; margin-top: 10px; color: var(--roxo); text-align: center; }
-
-        /* BOTÃO DO JOGO */
-        #abrirJogo {
-            background: var(--rosa); color: white; border: none; width: 70px; height: 70px;
-            border-radius: 50%; font-size: 2rem; cursor: pointer; margin: 20px auto 40px;
-            display: flex; align-items: center; justify-content: center; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        .caixa-contador h2 { 
+            font-family: 'Dancing Script'; color: var(--ouro); 
+            margin: 0 0 20px 0; font-size: 1.8rem; letter-spacing: 1px;
         }
-
-        /* TEXTOS COM ANIMAÇÃO */
-        .bloco { 
-            padding: 30px; margin-bottom: 30px; background: #fff; border-radius: 20px; 
-            border: 1px solid #f0f0f0; text-align: justify; line-height: 1.6;
-            opacity: 0; transform: translateY(30px); transition: all 1s ease-out;
+        .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .time-block {
+            background: rgba(0, 0, 0, 0.4); padding: 12px 5px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .bloco.visible { opacity: 1; transform: translateY(0); }
-        .bloco h2 { font-family: 'Dancing Script'; color: var(--roxo); text-align: center; }
+        .time-block span { display: block; font-size: 1.8rem; font-weight: 700; color: #fff; text-shadow: 0 0 10px var(--rosa-brilho); }
+        .time-block label { font-size: 0.65rem; color: #bbb; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* MODAL JOGO (ESTILO IMAGEM) */
-        #modalJogo {
+        /* LIVRINHO DE FOTOS */
+        .swiper { width: 100%; height: 460px; margin-bottom: 40px; }
+        .swiper-slide {
+            background: white; border-radius: 15px; border: 8px solid white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6); overflow: hidden;
+        }
+        .swiper-slide img { width: 100%; height: 82%; object-fit: cover; }
+        .legenda { color: #1a0000; font-family: 'Dancing Script'; font-size: 1.4rem; padding: 12px; }
+
+        /* BOTÃO ❤️ */
+        #gameTrigger {
+            background: #ff1493; border: none; width: 85px; height: 85px;
+            border-radius: 50%; font-size: 2.5rem; cursor: pointer; margin: 0 auto 40px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); transition: 0.3s;
+        }
+        #gameTrigger:hover { transform: scale(1.1) rotate(10deg); }
+
+        /* TEXTOS */
+        .bloco-texto {
+            background: white; color: #222; padding: 35px; border-radius: 30px;
+            margin-bottom: 30px; text-align: justify; line-height: 1.7;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3); border-right: 8px solid #4d0000;
+        }
+        .bloco-texto h2 { font-family: 'Dancing Script'; color: #4d0000; text-align: center; margin-top: 0; }
+
+        /* MODAL JOGO */
+        #modalGame {
             display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-            background: white; z-index: 6000; flex-direction: column; align-items: center; padding-top: 60px;
+            background: white; z-index: 10000; flex-direction: column; align-items: center; padding-top: 60px; color: #222;
         }
-        .pergunta { font-size: 1.3rem; font-weight: 600; margin-bottom: 30px; }
-        .slots { display: flex; gap: 5px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
-        .slot { width: 25px; height: 35px; border-bottom: 2px solid #ddd; font-size: 1.3rem; font-weight: bold; text-align: center; }
-        .grid-letras { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
-        .letra-btn {
-            background: var(--marrom); color: white; border: none; width: 45px; height: 45px;
-            border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+        .slot-area { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+        .slot-box { width: 28px; height: 40px; border-bottom: 3px solid #4d0000; font-size: 1.6rem; font-weight: bold; text-align: center; }
+        .key-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+        .key-btn {
+            background: #7a1b1b; color: white; border: none; width: 48px; height: 48px;
+            border-radius: 8px; font-size: 1.2rem; font-weight: bold;
         }
-        .letra-btn.usada { visibility: hidden; }
-
-        .vitoria-msg { font-family: 'Dancing Script'; font-size: 3rem; color: var(--rosa); display: none; margin-top: 20px; }
-        .coracao-sobe { position: absolute; bottom: -50px; animation: subir 3s forwards; font-size: 1.5rem; }
-        @keyframes subir { to { transform: translateY(-100vh); opacity: 0; } }
+        .key-btn.used { visibility: hidden; }
+        #winMsg { display: none; font-family: 'Dancing Script'; font-size: 3.5rem; color: #ff1493; margin-top: 20px; }
         
-        #youtube-player { position: absolute; top: -999px; }
+        .floating-heart { position: fixed; bottom: -50px; animation: floatUp 3s forwards; font-size: 2rem; pointer-events: none; }
+        @keyframes floatUp { to { transform: translateY(-110vh); opacity: 0; } }
+
+        #yt-player { position: absolute; top: -999px; }
     </style>
 </head>
 <body>
 
-<div id="youtube-player"></div>
+<div class="star-bg" id="starField"></div>
+<div id="yt-player"></div>
 
 <div id="overlay">
-    <h1 style="font-family: 'Dancing Script'; font-size: 4rem; color: white; margin: 0;">Beca e Neto</h1>
-    <p style="color: white; margin-bottom: 30px;">Amor Infinito 🌸</p>
-    <button id="playBtn">Nosso Amor 💕</button>
+    <h1 style="font-family: 'Dancing Script'; font-size: 4.5rem; color: white; margin-bottom: 10px;">Beca e Neto</h1>
+    <p style="color: rgba(255,255,255,0.8); margin-bottom: 35px;">Para todo o sempre...</p>
+    <button id="playBtn" onclick="start()">Nosso Amor 💕</button>
 </div>
 
-<div class="container" id="conteudo">
-    
-    <div class="contador-box">
-        <h3>Vivendo com a melhor pessoa do mundo há...</h3>
-        <div class="timer-display">
-            <div class="t-item"><span id="anos">0</span><div class="t-label">Anos</div></div>
-            <div class="t-item"><span id="meses">0</span><div class="t-label">Meses</div></div>
-            <div class="t-item"><span id="dias">0</span><div class="t-label">Dias</div></div>
-            <div class="t-item"><span id="horas">0</span><div class="t-label">Horas</div></div>
-            <div class="t-item"><span id="minutos">0</span><div class="t-label">Min</div></div>
-            <div class="t-item"><span id="segundos">0</span><div class="t-label">Seg</div></div>
+<div class="container" id="content">
+    <div class="caixa-contador">
+        <h2>Estamos escrevendo nossa história há...</h2>
+        <div class="timer-grid">
+            <div class="time-block"><span id="aa">0</span><label>Anos</label></div>
+            <div class="time-block"><span id="mm">0</span><label>Meses</label></div>
+            <div class="time-block"><span id="dd">0</span><label>Dias</label></div>
+            <div class="time-block"><span id="hh">0</span><label>Horas</label></div>
+            <div class="time-block"><span id="minn">0</span><label>Minutos</label></div>
+            <div class="time-block"><span id="ss">0</span><label>Segundos</label></div>
         </div>
     </div>
 
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://i.ibb.co/Y45tbVcC/Y45tbVcC.png"><div class="legenda">Viver muito mais você</div></div>
-            <div class="swiper-slide"><img src="https://i.ibb.co/ZRDKgR50/ZRDKgR50.png"><div class="legenda">Nosso brilho único</div></div>
-            <div class="swiper-slide"><img src="https://i.ibb.co/kvV3vKT/kvV3vKT.png"><div class="legenda">Para sempre nós</div></div>
-            <div class="swiper-slide"><img src="https://i.ibb.co/zHXckYgP/zHXckYgP.png"><div class="legenda">Meu porto seguro</div></div>
-            <div class="swiper-slide"><img src="https://i.ibb.co/8gy0W39H/8gy0W39H.png"><div class="legenda">Florescendo juntos</div></div>
-            <div class="swiper-slide"><img src="https://i.ibb.co/m5LN0zrt/m5LN0zrt.png"><div class="legenda">Minha vida é você</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/Y45tbVcC/Y45tbVcC.png"><div class="legenda">Viver com você</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/ZRDKgR50/ZRDKgR50.png"><div class="legenda">Nosso brilho</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/kvV3vKT/kvV3vKT.png"><div class="legenda">Sempre nós</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/zHXckYgP/zHXckYgP.png"><div class="legenda">Porto Seguro</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/8gy0W39H/8gy0W39H.png"><div class="legenda">Florescendo</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/m5LN0zrt/m5LN0zrt.png"><div class="legenda">Minha Vida</div></div>
         </div>
     </div>
 
-    <button id="abrirJogo">❤️</button>
+    <button id="gameTrigger" onclick="openGame()">❤️</button>
 
-    <div class="bloco reveal">
+    <div class="bloco-texto">
         <p>Você é o meu refúgio e o meu sonho realizado. Saiba que eu te amoo dms de vdd mesmo Lembro de cada momento dessas fotos para viver com você...</p>
     </div>
 
-    <div class="bloco reveal">
+    <div class="bloco-texto">
         <h2>Nossa Promessa ❤️</h2>
         <p>Amor, eu te amo tanto, mas tanto mesmo, que eu faria de tudo pra ter você ao meu lado. Eu não consigo me imaginar sem você, porque você é o amor da minha vida. Eu quero continuar com você até onde Deus permitir, ou até onde você quiser… mas por mim, eu nunca vou te deixar. <br><br> Eu sonho com a gente construindo tudo juntos: casar, ter nossa família, nossa casa… eu sei que não é fácil, mas eu acredito de verdade que a gente consegue, juntos. Quero mostrar pro mundo que um amor de adolescência pode sim dar certo quando existe esforço dos dois lados. <br><br> Eu escolhi você pra minha vida. Eu não quero ninguém além de você, é só você que eu quero. E mesmo quando eu fico chateado, é porque às vezes eu sinto que você não valoriza tudo que eu faço, todo o amor e carinho que eu te dou… e isso me machuca. Mas mesmo assim, eu não desisto da gente. <br><br> Eu acredito que a gente pode melhorar, crescer juntos, aprender um com o outro. Eu sei que você tem capacidade, e eu também tenho. Me desculpa por todos os meus erros, por tudo que já te fez chorar ou te magoou. De verdade, me perdoa… eu quero ser uma pessoa melhor pra você. <br><br> Eu quero que a gente dê certo, que a gente evite brigas, que a gente se entenda mais. Porque acima de tudo isso… eu te amo demais. Isso que estamos passando é só uma fase, e eu sei que a gente vai superar. <br><br> Eu não posso te perder… você é o amor da minha vida. ❤️</p>
     </div>
 
-    <div class="bloco reveal">
+    <div class="bloco-texto">
         <p>A melhor hora do meu dia é quando estamos conversando e também me sinto tão bem qnd te vejo e ficamos juntos slk... Um beijão do Netinho, eu te amoo Beca 💕🫶🏽</p>
     </div>
 </div>
 
-<div id="modalJogo">
-    <div class="pergunta">meu dia melhora quando</div>
-    <div class="slots" id="gameSlots">
-        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+<div id="modalGame">
+    <h3 style="margin-bottom: 25px;">meu dia melhora quando</h3>
+    <div class="slot-area" id="slotArea">
+        <div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div>
         <div style="width:100%"></div>
-        <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div>
         <div style="width:100%"></div>
-        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div>
     </div>
-    <div class="grid-letras" id="gradeLetras"></div>
-    <div class="vitoria-msg" id="vitoriaTexto">Eu Te Amo ❤️💎</div>
-    <div id="coracoes-container" style="position:fixed; bottom:0; width:100%; pointer-events:none;"></div>
+    <div class="key-grid" id="keyArea"></div>
+    <div id="winMsg">Eu Te Amo ❤️💎</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
-
 <script>
-    var swiper = new Swiper(".mySwiper", { effect: "cards", grabCursor: true });
+    // Criar Estrelas
+    const field = document.getElementById('starField');
+    for (let i = 0; i < 120; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        s.style.left = Math.random() * 100 + 'vw';
+        s.style.top = Math.random() * 100 + 'vh';
+        s.style.width = s.style.height = Math.random() * 2.5 + 'px';
+        s.style.setProperty('--d', Math.random() * 3 + 2 + 's');
+        field.appendChild(s);
+    }
 
-    // Animação de Surgimento dos Textos (Scroll)
-    window.addEventListener('scroll', () => {
-        document.querySelectorAll('.reveal').forEach(el => {
-            if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('visible');
-        });
-    });
+    var swiper = new Swiper(".mySwiper", { effect: "cards", grabCursor: true });
 
     var player;
     function onYouTubeIframeAPIReady() {
-        player = new YT.Player('youtube-player', {
+        player = new YT.Player('yt-player', {
             videoId: 'Dwsd8SePKOs',
-            playerVars: { 'start': 24, 'playlist': 'Dwsd8SePKOs', 'loop': 1 },
-            events: { 'onReady': function() {
-                document.getElementById('playBtn').onclick = function() {
-                    player.playVideo();
-                    document.getElementById('overlay').style.opacity = '0';
-                    setTimeout(() => {
-                        document.getElementById('overlay').style.display='none';
-                        document.getElementById('conteudo').style.display='block';
-                        iniciarTimer();
-                        // Força a primeira checagem de revelação de texto
-                        window.dispatchEvent(new Event('scroll'));
-                    }, 1000);
-                };
-            }}
+            playerVars: { 'autoplay': 0, 'start': 24, 'loop': 1, 'playlist': 'Dwsd8SePKOs' }
         });
     }
 
-    function iniciarTimer() {
-        const inicio = new Date("2024-12-22T00:00:00");
-        setInterval(() => {
-            const agora = new Date();
-            const d = agora - inicio;
-            document.getElementById('anos').innerText = Math.floor(d / 31536000000);
-            document.getElementById('meses').innerText = Math.floor((d % 31536000000) / 2628000000);
-            document.getElementById('dias').innerText = Math.floor((d % 2628000000) / 86400000);
-            document.getElementById('horas').innerText = Math.floor((d % 86400000) / 3600000);
-            document.getElementById('minutos').innerText = Math.floor((d % 3600000) / 60000);
-            document.getElementById('segundos').innerText = Math.floor((d % 60000) / 1000);
+    function start() {
+        player.playVideo();
+        document.getElementById('overlay').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            runTimer();
         }, 1000);
     }
 
-    // LÓGICA DO JOGO
-    const resposta = "ESTOUCOMVOCE";
-    const letrasEmbaralhadas = ["M", "C", "O", "V", "C", "O", "Ê", "E", "S", "T", "O", "U"];
-    let acertos = 0;
+    function runTimer() {
+        const begin = new Date("2024-12-22T00:00:00");
+        setInterval(() => {
+            const now = new Date();
+            const diff = now - begin;
+            document.getElementById('aa').innerText = Math.floor(diff / 31536000000);
+            document.getElementById('mm').innerText = Math.floor((diff % 31536000000) / 2628000000);
+            document.getElementById('dd').innerText = Math.floor((diff % 2628000000) / 86400000);
+            document.getElementById('hh').innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById('minn').innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById('ss').innerText = Math.floor((diff % 60000) / 1000);
+        }, 1000);
+    }
 
-    document.getElementById('abrirJogo').onclick = () => {
-        document.getElementById('modalJogo').style.display = 'flex';
-        const grade = document.getElementById('gradeLetras');
-        grade.innerHTML = "";
-        letrasEmbaralhadas.forEach(letra => {
-            let btn = document.createElement("button");
-            btn.className = "letra-btn";
-            btn.innerText = letra;
-            btn.onclick = () => {
-                if(letra.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase() === resposta[acertos].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase()){
-                    document.querySelectorAll('.slot')[acertos].innerText = letra;
-                    btn.classList.add('usada');
-                    acertos++;
-                    if(acertos === resposta.length) {
-                        document.getElementById('vitoriaTexto').style.display = 'block';
+    // Jogo
+    const answer = "ESTOUCOMVOCE";
+    const scrambled = ["M", "C", "O", "V", "C", "O", "Ê", "E", "S", "T", "O", "U"];
+    let hits = 0;
+
+    function openGame() {
+        document.getElementById('modalGame').style.display = 'flex';
+        const area = document.getElementById('keyArea');
+        area.innerHTML = "";
+        scrambled.forEach(l => {
+            let b = document.createElement("button");
+            b.className = "key-btn";
+            b.innerText = l;
+            b.onclick = () => {
+                let lClean = l.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+                let aClean = answer[hits].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+                if(lClean === aClean) {
+                    document.querySelectorAll('.slot-box')[hits].innerText = l;
+                    b.classList.add('used');
+                    hits++;
+                    if(hits === answer.length) {
+                        document.getElementById('winMsg').style.display = 'block';
                         setInterval(() => {
-                            const c = document.createElement("div");
-                            c.className = "coracao-sobe"; c.innerHTML = "❤️";
-                            c.style.left = Math.random() * 100 + "vw";
-                            document.getElementById('coracoes-container').appendChild(c);
+                            const h = document.createElement("div");
+                            h.className = "floating-heart"; h.innerHTML = "❤️";
+                            h.style.left = Math.random() * 100 + "vw";
+                            document.body.appendChild(h);
                         }, 200);
-                        setTimeout(() => document.getElementById('modalJogo').style.display='none', 4000);
+                        setTimeout(() => document.getElementById('modalGame').style.display='none', 5000);
                     }
                 }
             };
-            grade.appendChild(btn);
+            area.appendChild(b);
         });
-    };
+    }
 </script>
 </body>
 </html>
