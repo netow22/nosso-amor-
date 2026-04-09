@@ -3,118 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beca e Neto</title>
+    <title>Beca e Neto: Nosso Universo</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         :root {
-            --roxo-fundo: #1a0033;
-            --vinho-preto: linear-gradient(135deg, #3a0000 0%, #000000 100%);
-            --rosa: #ff1493;
+            --roxo-fundo: #2e004f;
+            --vinho-preto: linear-gradient(135deg, #4a0000 0%, #0a001a 100%);
+            --rosa-brilhante: #ff1493;
+            --vermelho-paixao: #ff0000;
+            --dourado-glow: #ffd700;
             --marrom-jogo: #7a1b1b;
+            --branco: #ffffff;
         }
 
         * { box-sizing: border-box; }
         body { 
             margin: 0; padding: 0; font-family: 'Poppins', sans-serif; 
-            background: var(--roxo-fundo); color: white; overflow-x: hidden;
+            background: radial-gradient(ellipse at bottom, #2e004f 0%, #0a001a 100%); color: var(--branco); overflow-x: hidden;
         }
-
-        /* FUNDO DE ESTRELAS */
-        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle, #2e004f 0%, #05000a 100%); }
-        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle var(--t) infinite; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
         /* TELA DE ENTRADA */
         #overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, #8a2be2, #ff1493);
-            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.5s;
+            background: linear-gradient(-45deg, #8a2be2, #ff1493, #ff0000);
+            background-size: 400% 400%; z-index: 9999; display: flex; 
+            flex-direction: column; justify-content: center; align-items: center; 
+            transition: opacity 1.2s ease; animation: gradientMestico 10s ease infinite;
+            overflow: hidden;
         }
+
+        @keyframes gradientMestico {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .balloon {
+            position: absolute; bottom: -100px; font-size: 2.5rem;
+            animation: balloonRise 6s linear infinite; pointer-events: none; opacity: 0.6; z-index: -1;
+        }
+
+        @keyframes balloonRise {
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.6; }
+            100% { transform: translateY(-120vh) scale(1.3) rotate(360deg); opacity: 0; }
+        }
+
+        #titulo-overlay {
+            font-family: 'Dancing Script', cursive; font-size: 5rem; color: var(--dourado-glow);
+            margin: 0; text-shadow: 0 0 20px var(--dourado-glow), 0 0 40px var(--vermelho-paixao);
+            text-align: center;
+        }
+
+        #tema-overlay {
+            font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--dourado-glow);
+            margin: 10px 0 50px 0; text-shadow: 0 0 10px var(--branco); text-align: center;
+        }
+
         #playBtn {
-            background: white; color: #ff1493; border: none; padding: 15px 40px;
-            font-size: 1.5rem; border-radius: 50px; cursor: pointer; font-family: 'Dancing Script'; font-weight: bold;
+            background: var(--branco); color: var(--roxo-fundo); border: none; padding: 20px 60px;
+            font-size: 1.6rem; border-radius: 60px; cursor: pointer; font-weight: 600;
+            animation: buttonPulse 2s infinite; transition: 0.4s;
         }
 
-        .container { display: none; max-width: 450px; margin: 0 auto; padding: 15px; text-align: center; }
-
-        /* CONTADOR */
-        .timer-card {
-            background: var(--vinho-preto); padding: 25px 10px; border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 20px 0;
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 10px 40px rgba(255, 20, 147, 0.5); }
         }
-        .timer-card h2 { font-family: 'Dancing Script'; color: var(--rosa); font-size: 1.6rem; margin-bottom: 15px; }
-        .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .t-unit { background: rgba(0,0,0,0.5); padding: 10px 2px; border-radius: 10px; }
-        .t-unit span { display: block; font-size: 1.4rem; font-weight: bold; }
-        .t-unit label { font-size: 0.6rem; color: #aaa; text-transform: uppercase; }
 
-        /* LIVRINHO DE FOTOS CORRIGIDO */
-        .swiper { width: 100%; max-width: 320px; height: 400px; margin: 20px auto; }
+        /* CONTEÚDO PRINCIPAL */
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; display: none; text-align: center; }
+
+        .caixa-contador {
+            background: linear-gradient(145deg, #4a0000 0%, #000000 100%);
+            padding: 25px 15px; border-radius: 25px; border: 2px solid rgba(255, 215, 0, 0.3);
+            margin-bottom: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+        }
+
+        .timer-display { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .unit { background: rgba(0, 0, 0, 0.4); padding: 10px 5px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .unit span { display: block; font-size: 1.5rem; font-weight: bold; color: var(--branco); }
+        .unit label { font-size: 0.6rem; color: #aaa; text-transform: uppercase; }
+
+        /* LIVRINHO */
+        .swiper { width: 100%; height: 420px; margin-bottom: 40px; }
         .swiper-slide {
-            background: white; border-radius: 15px; border: 6px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4); overflow: hidden;
+            background: var(--branco); border-radius: 15px; border: 8px solid var(--branco);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4); overflow: hidden;
         }
         .swiper-slide img { width: 100%; height: 82%; object-fit: cover; }
-        .legenda { color: #1a0033; font-family: 'Dancing Script'; font-size: 1.2rem; padding: 5px; }
+        .legenda { color: var(--roxo-fundo); font-family: 'Dancing Script', cursive; font-size: 1.3rem; padding: 10px; }
 
-        /* BOTÃO DO JOGO */
-        #btnGame {
-            background: var(--rosa); border: none; width: 70px; height: 70px;
-            border-radius: 50%; font-size: 2rem; cursor: pointer; margin-bottom: 30px;
-            box-shadow: 0 0 15px var(--rosa);
+        /* TEXTO NOVO (ACIMA DA PROMESSA) */
+        .texto-destaque {
+            background: linear-gradient(to right, #ffffff, #ffeef8); color: #2e004f;
+            padding: 25px; border-radius: 20px; margin-bottom: 30px;
+            font-size: 1.1rem; font-weight: 600; border-bottom: 5px solid var(--vermelho-paixao);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        /* CAIXINHAS DE TEXTO TAMANHO MÉDIO */
+        /* CARDS DE TEXTO */
         .text-card {
-            background: white; color: #333; padding: 20px; border-radius: 15px;
-            margin-bottom: 20px; text-align: justify; line-height: 1.5; font-size: 0.95rem;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2); border-left: 6px solid var(--rosa);
+            background: var(--branco); color: #333; padding: 25px; border-radius: 20px;
+            margin-bottom: 30px; text-align: justify; line-height: 1.7;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); border-left: 8px solid var(--rosa-brilhante);
         }
-        .text-card h2 { font-family: 'Dancing Script'; color: var(--roxo-fundo); text-align: center; font-size: 1.5rem; margin-top: 0; }
+        .text-card h2 { font-family: 'Dancing Script', cursive; color: var(--roxo-fundo); text-align: center; margin-top: 0; }
 
-        /* MODAL DO JOGO CORRIGIDO */
+        #btnGame {
+            background: var(--rosa-brilhante); color: var(--branco); border: none; width: 75px; height: 75px;
+            border-radius: 50%; font-size: 2.2rem; cursor: pointer; margin-bottom: 30px;
+            box-shadow: 0 0 20px var(--rosa-brilhante);
+        }
+
+        /* JOGO */
         #modalGame {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #ffffff; z-index: 10000; flex-direction: column; align-items: center; justify-content: center;
+            background: var(--branco); z-index: 10000; flex-direction: column; align-items: center; justify-content: center;
             color: #333; padding: 20px;
         }
-        .slot-container { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
-        .slot { width: 25px; height: 35px; border-bottom: 2px solid #333; font-size: 1.3rem; font-weight: bold; text-align: center; }
-        .keyboard { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+        .slots { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+        .slot { width: 28px; height: 38px; border-bottom: 2px solid #333; font-size: 1.4rem; font-weight: bold; text-align: center; }
+        .keyboard { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
         .key {
-            background: var(--marrom-jogo); color: white; border: none; width: 42px; height: 42px;
-            border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            background: var(--marrom-jogo); color: var(--branco); border: none; width: 45px; height: 45px;
+            border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
         }
         .key.off { visibility: hidden; }
-        #win { display: none; font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--rosa); margin-top: 15px; }
+        #win { display: none; font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--rosa-brilhante); text-align: center; }
 
         .h-float { position: fixed; bottom: -50px; animation: floatUp 3s forwards; font-size: 2rem; pointer-events: none; }
         @keyframes floatUp { to { transform: translateY(-110vh); opacity: 0; } }
-        
         #yt { position: absolute; top: -999px; }
     </style>
 </head>
 <body>
 
-<div class="stars" id="starField"></div>
 <div id="yt"></div>
 
 <div id="overlay">
-    <h1 style="font-family: 'Dancing Script'; font-size: 3.5rem; color: white;">Beca e Neto</h1>
+    <h1 id="titulo-overlay">Beca e Neto</h1>
+    <p id="tema-overlay">Eu Te Amo, Meu Amor, Cada Dia Mais ❤️💎</p>
     <button id="playBtn" onclick="startApp()">Nosso Amor 💕</button>
 </div>
 
 <div class="container" id="main">
-    <div class="timer-card">
-        <h2>Vivendo nosso sonho há...</h2>
-        <div class="timer-grid">
-            <div class="t-unit"><span id="aa">0</span><label>Anos</label></div>
-            <div class="t-unit"><span id="mm">0</span><label>Meses</label></div>
-            <div class="t-unit"><span id="dd">0</span><label>Dias</label></div>
-            <div class="t-unit"><span id="hh">0</span><label>Horas</label></div>
-            <div class="t-unit"><span id="mi">0</span><label>Min</label></div>
-            <div class="t-unit"><span id="ss">0</span><label>Seg</label></div>
+    <div class="caixa-contador">
+        <div class="timer-display">
+            <div class="unit"><span id="aa">0</span><label>Anos</label></div>
+            <div class="unit"><span id="mm">0</span><label>Meses</label></div>
+            <div class="unit"><span id="dd">0</span><label>Dias</label></div>
+            <div class="unit"><span id="hh">0</span><label>Horas</label></div>
+            <div class="unit"><span id="mi">0</span><label>Min</label></div>
+            <div class="unit"><span id="ss">0</span><label>Seg</label></div>
         </div>
     </div>
 
@@ -129,75 +170,80 @@
         </div>
     </div>
 
+    <div class="texto-destaque">
+        "Cada foto dessa é um pedaço da nossa felicidade. Eu olho pra elas e vejo o quanto a gente combina e o quanto eu quero que isso nunca acabe."
+    </div>
+
     <button id="btnGame" onclick="openGame()">❤️</button>
 
     <div class="text-card">
-        <p>Você é o meu refúgio e o meu sonho realizado. Saiba que eu te amoo dms de vdd mesmo Lembro de cada momento dessas fotos para viver com você...</p>
-    </div>
-
-    <div class="text-card">
         <h2>Nossa Promessa ❤️</h2>
-        <p>Amor, eu te amo tanto, mas tanto mesmo... eu faria de tudo pra ter você ao meu lado. Sonho com a gente construindo tudo juntos: casar, ter nossa família. Escolhi você pra minha vida. Eu não posso te perder... você é o amor da minha vida. ❤️</p>
+        <p>Amor, eu te amo tanto, mas tanto mesmo, que eu faria de tudo pra ter você ao meu lado. Eu não consigo me imaginar sem você, porque você é o amor da minha vida. Eu quero continuar com você até onde Deus permitir, ou até onde você quiser… mas por mim, eu nunca vou te deixar. <br><br> Eu sonho com a gente construindo tudo juntos: casar, ter nossa família, nossa casa… eu sei que não é fácil, mas eu acredito de verdade que a gente consegue, juntos. Quero mostrar pro mundo que um amor de adolescência pode sim dar certo quando existe esforço dos dois lados. <br><br> Eu escolhi você pra minha vida. Eu não quero ninguém além de você, é só você que eu quero. E mesmo quando eu fico chateado, é porque às vezes eu sinto que você não valoriza tudo que eu faço, todo o amor e carinho que eu te dou… e isso me machuca. Mas mesmo assim, eu não desisto da gente. <br><br> Eu acredito que a gente pode melhorar, crescer juntos, aprender um com o outro. Eu sei que você tem capacidade, e eu também tenho. Me desculpa por todos os meus erros, por tudo que já te fez chorar ou te magoou. De verdade, me perdoa… eu quero ser uma pessoa melhor pra você. <br><br> Eu quero que a gente dê certo, que a gente evite brigas, que a gente se entenda mais. Porque acima de tudo isso… eu te amo demais. Isso que estamos passando é só uma fase, e eu sei que a gente vai superar. <br><br> Eu não posso te perder… você é o amor da minha vida. ❤️</p>
     </div>
 
     <div class="text-card">
-        <p>A melhor hora do meu dia é quando estamos conversando. Me sinto tão bem quando te vejo. Um beijão do Netinho, eu te amoo Beca 💕🫶🏽</p>
+        <p>A melhor hora do meu dia é quando estamos conversando e também me sinto tão bem qnd te vejo e ficamos juntos slk... Um beijão do Netinho, eu te amoo Beca 💕🫶🏽</p>
     </div>
 </div>
 
 <div id="modalGame">
     <h3 style="margin-bottom: 15px;">meu dia melhora quando</h3>
-    <div class="slot-container" id="slots">
+    <div class="slots" id="slotsArea">
         <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
         <div style="width:100%"></div>
         <div class="slot"></div><div class="slot"></div><div class="slot"></div>
         <div style="width:100%"></div>
         <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
     </div>
-    <div class="keyboard" id="keys"></div>
+    <div class="keyboard" id="keysArea"></div>
     <div id="win">Eu Te Amo ❤️💎</div>
-    <button onclick="document.getElementById('modalGame').style.display='none'" style="margin-top:20px; border:none; background:none; color:#999;">fechar</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
-    // Gerar estrelas
-    const f = document.getElementById('starField');
-    for (let i = 0; i < 80; i++) {
-        let s = document.createElement('div');
-        s.className = 'star';
-        s.style.left = Math.random() * 100 + 'vw';
-        s.style.top = Math.random() * 100 + 'vh';
-        s.style.width = s.style.height = Math.random() * 3 + 'px';
-        s.style.setProperty('--t', Math.random() * 3 + 2 + 's');
-        f.appendChild(s);
+    const overlay = document.getElementById('overlay');
+    function createBalloon() {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.innerHTML = Math.random() > 0.5 ? '❤️' : '💖';
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.color = Math.random() > 0.5 ? 'var(--vermelho-paixao)' : 'var(--rosa-brilhante)';
+        balloon.style.animationDuration = Math.random() * 3 + 4 + 's';
+        overlay.appendChild(balloon);
+        setTimeout(() => { balloon.remove(); }, 7000);
     }
+    setInterval(createBalloon, 400);
 
-    // Swiper Inicializado
     var swiper = new Swiper(".mySwiper", { effect: "cards", grabCursor: true, loop: true });
 
     var player;
     function onYouTubeIframeAPIReady() {
-        player = new YT.Player('yt', { videoId: 'Dwsd8SePKOs', playerVars: { 'start': 24, 'playlist': 'Dwsd8SePKOs', 'loop': 1 } });
+        player = new YT.Player('yt', { videoId: 'Dwsd8SePKOs', playerVars: { 'autoplay': 0, 'start': 24, 'playlist': 'Dwsd8SePKOs', 'loop': 1 } });
     }
 
     function startApp() {
         if(player && player.playVideo) player.playVideo();
-        document.getElementById('overlay').style.display = 'none';
-        document.getElementById('main').style.display = 'block';
-        setInterval(updateTimer, 1000);
+        document.getElementById('overlay').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('main').style.display = 'block';
+            iniciarContador();
+        }, 1200);
     }
 
-    function updateTimer() {
+    function iniciarContador() {
         const start = new Date("2024-12-22T00:00:00");
-        const diff = new Date() - start;
-        document.getElementById('aa').innerText = Math.floor(diff / 31536000000);
-        document.getElementById('mm').innerText = Math.floor((diff % 31536000000) / 2628000000);
-        document.getElementById('dd').innerText = Math.floor((diff % 2628000000) / 86400000);
-        document.getElementById('hh').innerText = Math.floor((diff % 86400000) / 3600000);
-        document.getElementById('mi').innerText = Math.floor((diff % 3600000) / 60000);
-        document.getElementById('ss').innerText = Math.floor((diff % 60000) / 1000);
+        setInterval(() => {
+            const now = new Date();
+            const d = now - start;
+            document.getElementById('aa').innerText = Math.floor(d / 31536000000);
+            document.getElementById('mm').innerText = Math.floor((d % 31536000000) / 2628000000);
+            document.getElementById('dd').innerText = Math.floor((d % 2628000000) / 86400000);
+            document.getElementById('hh').innerText = Math.floor((d % 86400000) / 3600000);
+            document.getElementById('mi').innerText = Math.floor((d % 3600000) / 60000);
+            document.getElementById('ss').innerText = Math.floor((d % 60000) / 1000);
+        }, 1000);
     }
 
     const sol = "ESTOUCOMVOCE";
@@ -206,7 +252,7 @@
 
     function openGame() {
         document.getElementById('modalGame').style.display = 'flex';
-        const k = document.getElementById('keys');
+        const k = document.getElementById('keysArea');
         k.innerHTML = "";
         emb.forEach(l => {
             let b = document.createElement("button");
@@ -224,6 +270,7 @@
                             let h = document.createElement("div"); h.className = "h-float"; h.innerHTML = "❤️";
                             h.style.left = Math.random() * 100 + "vw"; document.body.appendChild(h);
                         }, 200);
+                        setTimeout(() => document.getElementById('modalGame').style.display='none', 5000);
                     }
                 }
             };
