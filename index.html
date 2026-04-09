@@ -7,83 +7,356 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --roxo: #8a2be2;
-            --azul: #00bfff;
-            --rosa: #ff69b4;
+            /* Paleta de Cores Vibrantes e Felizes (Roxo, Azul, Rosa) */
+            --degrade-roxo: #8a2be2; /* Violeta Vibrante */
+            --degrade-azul: #00bfff; /* Deep Sky Blue */
+            --degrade-rosa: #ff1493; /* Rosa Forte */
+            --violeta-vibrante: #8a2be2; /* Violeta para detalhes principais */
+            --violeta-glow: #e0b0ff; /* Violeta Suave para Glow */
+            --fundo-rosa-claro: #fff5f8; /* Rosa Bebê super claro */
             --branco: #ffffff;
-            --fundo: #fff5f8;
+            --preto-suave: #333333;
+            --dourado-brilhante: #ffd700; /* Ouro */
         }
 
         body {
-            background-color: var(--fundo);
+            background-color: var(--fundo-rosa-claro);
             font-family: 'Poppins', sans-serif;
             margin: 0;
             overflow-x: hidden;
-            background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png');
+            background-image: url('https://www.transparenttextures.com/patterns/floral-paper.png'); /* Textura floral branca suave */
         }
 
-        /* TELA DE ENTRADA MESTIÇA (ROXO, AZUL, ROSA) */
+        /* TELA DE ENTRADA (Misteriosa e Bela com Degradê Vivo e Movimento) */
         #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, var(--roxo), var(--azul), var(--rosa));
-            background-size: 400% 400%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 1000; color: white; transition: opacity 1.5s ease;
-            animation: moveGradient 10s ease infinite;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Degradê Suave Roxo, Azul e Rosa com Movimento */
+            background: linear-gradient(135deg, var(--degrade-roxo), var(--degrade-azul), var(--degrade-rosa));
+            background-size: 400% 400%; /* Para animação */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            transition: opacity 1.5s ease; /* Transição suave de fade out */
+            animation: gradientAnimation 15s ease infinite; /* Animação de degradê */
         }
 
-        @keyframes moveGradient {
+        @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        #titulo-overlay { font-family: 'Dancing Script', cursive; font-size: 5rem; margin-bottom: 0; text-shadow: 0 0 15px rgba(255,255,255,0.6); }
-        #subtitulo-overlay { font-family: 'Dancing Script', cursive; font-size: 2.2rem; margin-bottom: 40px; }
+        /* Título da Tela Inicial em Caligrafia Dourada Brilhante */
+        #titulo-overlay {
+            font-family: 'Dancing Script', cursive;
+            font-size: 6rem;
+            color: var(--branco); /* Branco para contraste, mas animado para Dourado */
+            margin: 0;
+            text-shadow: 0 0 10px var(--dourado-brilhante), 0 0 20px var(--dourado-brilhante);
+            animation: glowAnimation 1.5s ease-in-out infinite;
+        }
 
+        @keyframes glowAnimation {
+            0% { text-shadow: 0 0 10px var(--dourado-brilhante), 0 0 20px var(--dourado-brilhante); }
+            50% { text-shadow: 0 0 15px var(--branco), 0 0 25px var(--dourado-brilhante); }
+            100% { text-shadow: 0 0 10px var(--dourado-brilhante), 0 0 20px var(--dourado-brilhante); }
+        }
+
+        /* Frase Amor Infinito na Tela Inicial */
+        #amor-infinito-overlay {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--branco);
+            margin: 10px 0 60px 0;
+            text-shadow: 0 0 5px var(--dourado-brilhante);
+        }
+
+        /* BOTÃO MISTERIOSO E BELO (Pulse e Glow) */
         #playBtn {
-            background: var(--branco); color: var(--roxo); border: none; padding: 20px 50px;
-            font-size: 1.6rem; border-radius: 50px; cursor: pointer; font-weight: 600;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: 0.4s;
+            background: var(--branco);
+            color: var(--violeta-vibrante);
+            border: none;
+            padding: 25px 70px;
+            font-size: 1.8rem;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif; /* Poppins para o texto do botão */
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            text-transform: capitalize;
+            letter-spacing: 1px;
+            animation: buttonPulse 2s infinite; /* Efeito de Pulse */
         }
 
-        #playBtn:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--azul), 0 0 40px var(--rosa); }
-
-        header { text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.9); border-bottom: 4px solid var(--azul); }
-        h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; color: var(--roxo); margin: 0; }
-        
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; display: none; }
-
-        .card-texto {
-            background: var(--branco); padding: 35px; border-radius: 25px; margin-bottom: 40px;
-            border: 2px solid #eee; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        #playBtn:hover {
+            transform: scale(1.1);
+            background: var(--violeta-vibrante);
+            color: var(--branco);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4), 0 0 30px var(--degrade-azul), 0 0 60px var(--degrade-rosa); /* Brilho Rosa, Azul, Roxo no Hover */
         }
 
-        /* BLOCO DE TEXTO ESPECIAL (O QUE VOCÊ MANDOU) */
-        .bloco-promessa {
+        @keyframes buttonPulse {
+            0% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 10px 40px rgba(255, 105, 180, 0.6), 0 0 15px var(--degrade-azul); }
+            100% { box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        }
+
+        /* CABEÇALHO PRINCIPAL DO SITE (Surgindo Após o Play) */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 5px solid var(--rosa-claro);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: var(--violeta-vibrante);
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* CONTEÚDO DO SITE (Ficado Leve e Belo com Efeitos Suaves) */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: none; /* Escondido até o play */
+        }
+
+        /* CONTADOR EM TEMPO REAL (Mestiço) */
+        #contador-lindo {
+            background: rgba(255, 255, 255, 0.9);
             border: 3px solid;
-            border-image: linear-gradient(to right, var(--roxo), var(--azul), var(--rosa)) 1;
-            padding: 40px; background: #fff; margin-top: 50px; border-radius: 10px;
+            border-image: linear-gradient(to right, var(--violeta-vibrante), var(--degrade-azul), var(--degrade-rosa)) 1;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.1);
         }
 
-        .texto-principal { font-size: 1.15rem; line-height: 1.8; color: #444; font-style: italic; }
+        #timer {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            font-weight: 600;
+            color: var(--rosa-forte);
+            font-size: 1.2rem;
+        }
 
-        /* GALERIA POLAROID COM GLOW */
-        .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .timer-unit {
+            background: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 80px;
+            border: 1px solid #eee;
+        }
+
+        .timer-unit span {
+            font-size: 2rem;
+            display: block;
+            color: var(--roxo-escuro);
+        }
+
+        /* Cards de Texto Leves e Belos */
+        .card-texto {
+            background: var(--branco);
+            padding: 50px;
+            border-radius: 30px;
+            margin-bottom: 60px;
+            border: 2px solid var(--violeta-glow); /* Borda Violeta Suave */
+            position: relative;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-texto::before, .card-texto::after {
+            content: "🌸";
+            font-size: 2.5rem;
+            position: absolute;
+            color: var(--degrade-rosa); /* Rosa para detalhes */
+        }
+        .card-texto::before { top: 15px; left: 15px; }
+        .card-texto::after { bottom: 15px; right: 15px; }
+
+        .texto-principal {
+            font-size: 1.4rem;
+            line-height: 1.9;
+            color: var(--preto-suave);
+            font-style: italic;
+        }
+
+        /* GALERIA ESTILO POLAROID COM EFEITO DE BRILHO (Glow) */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
         .foto-item {
-            background: var(--branco); padding: 12px; border-bottom: 50px solid var(--branco);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1); transition: 0.5s; text-align: center;
+            background: var(--branco);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            text-align: center;
+            border-bottom: 70px solid var(--branco); /* Estilo Polaroid */
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Efeito de Brilho (Glow) Rosa, Roxo e Azul no Hover */
         .foto-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 15px var(--rosa), 0 0 30px var(--azul);
+            transform: translateY(-15px) rotate(1deg);
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.8), 0 0 50px rgba(138, 43, 226, 0.5), 0 0 75px rgba(0, 191, 255, 0.3); /* Brilho Rosa, Roxo, Azul */
         }
-        .foto-item img { width: 100%; height: 350px; object-fit: cover; }
-        .legenda-foto { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--roxo); margin-top: 10px; }
 
-        footer { text-align: center; padding: 80px; font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: var(--roxo); }
+        .foto-item img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
+        }
 
-        #youtube-player { position: absolute; top: -9999px; left: -9999px; }
+        .legenda-foto {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.7rem;
+            color: var(--violeta-vibrante);
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* BOTÃO ROSA COM CORAÇÃO (PARA O JOGO) */
+        #forca-btn {
+            background: linear-gradient(135deg, var(--degrade-rosa), var(--rosa-forte));
+            color: var(--branco);
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 60px auto;
+            transition: 0.3s;
+            animation: pulseRosa 2s infinite;
+        }
+
+        #forca-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.5);
+        }
+
+        @keyframes pulseRosa {
+            0% { box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3); }
+            50% { box-shadow: 0 10px 40px rgba(255, 20, 147, 0.6), 0 0 15px rgba(138, 43, 226, 0.3); }
+            100% { box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3); }
+        }
+
+        #forca-btn .coracao-icon { font-size: 2.2rem; }
+
+        /* JOGO DA FORCA (MODAL) */
+        #forca-modal {
+            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center; align-items: center;
+            color: var(--preto-suave);
+        }
+
+        #modal-content {
+            background: var(--branco);
+            padding: 40px;
+            border-radius: 20px;
+            border: 4px solid;
+            border-image: linear-gradient(to right, var(--violeta-vibrante), var(--degrade-azul), var(--degrade-rosa)) 1;
+            text-align: center;
+            max-width: 90%; width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        #close-modal {
+            position: absolute; top: 15px; right: 15px;
+            font-size: 1.8rem; cursor: pointer; color: #999;
+        }
+
+        .forca-pergunta { font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--violeta-vibrante); margin-bottom: 20px; }
+        .forca-palavra { font-size: 2.2rem; font-weight: 600; letter-spacing: 5px; color: var(--degrade-roxo); margin: 30px 0; }
+        .teclado { display: grid; grid-template-columns: repeat(repeat-fit, minmax(40px, 1fr)); gap: 10px; margin-top: 30px; }
+        
+        .tecla {
+            background: #eee; border: none; padding: 10px; border-radius: 5px;
+            font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: 0.2s;
+        }
+        .tecla:hover { background: #ddd; }
+        .tecla.disabled { color: #999; background: #f5f5f5; cursor: default; border: 1px solid #ddd; }
+        .tecla.disabled:hover { background: #f5f5f5; }
+        .tecla.checked-wrong { background: rgba(255, 20, 147, 0.2); border: 1px solid var(--rosa-forte); color: #c00; }
+        
+        .mensagem-vitoria { font-family: 'Dancing Script'; font-size: 3rem; color: var(--dourado-brilhante); display: none; margin-top: 20px; text-shadow: 0 0 10px var(--degrade-rosa); animation: glowVictory 1s infinite; }
+        @keyframes glowVictory { 0% { text-shadow: 0 0 10px var(--degrade-rosa); } 50% { text-shadow: 0 0 20px var(--branco); } 100% { text-shadow: 0 0 10px var(--degrade-rosa); } }
+
+        /* Card da Carta de Amor Final - Estilo Carta */
+        .carta-amor {
+            background: #fff; border: 3px solid;
+            border-image: linear-gradient(to right, var(--violeta-vibrante), var(--degrade-azul), var(--degrade-rosa)) 1;
+            padding: 50px; border-radius: 40px; margin-top: 60px; margin-bottom: 50px;
+            text-align: left; position: relative;
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.15);
+        }
+
+        .carta-amor h2 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--degrade-rosa); margin-top: 0; text-align: center; }
+        .carta-amor .texto-principal { text-align: justify; font-style: normal; font-weight: 500; font-size: 1.2rem; }
+
+        footer {
+            text-align: center;
+            padding: 100px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--violeta-vibrante);
+        }
+
+        /* Player YouTube Invisível */
+        #youtube-player {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        /* ANIMAÇÃO DE CORAÇÕES SUBINDO (JOGO) */
+        @keyframes heartsRise {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-300px) scale(1.5); opacity: 0; }
+        }
+        
+        .coracao-vitoria {
+            position: fixed; bottom: 50px; left: 50%;
+            font-size: 2.5rem; color: var(--degrade-rosa);
+            animation: heartsRise 2s forwards;
+            pointer-events: none;
+            z-index: 3000;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -92,19 +365,32 @@
 
     <div id="overlay">
         <h1 id="titulo-overlay">Beca e Neto</h1>
-        <p id="subtitulo-overlay">Amor Infinito 🌸💜</p>
-        <button id="playBtn">Eu Te Amo Demais, Meu Amor ❤️💎</button>
+        <p id="amor-infinito-overlay">Amor Infinito 🌸💜💎</p>
+        <button id="playBtn">Nosso Amor 💕💎</button>
     </div>
 
     <header>
         <h1>Nosso Jardim Eterno 🌸</h1>
+        <p style="color: var(--violeta-vibrante); font-size: 1.1rem; margin-top: 10px;">Uma celebração do nosso amor diário</p>
     </header>
 
     <div class="container" id="conteudo">
         
-        <div class="card-texto">
+        <div id="contador-lindo">
+            <h2 style="font-family: 'Dancing Script'; color: var(--roxo); margin-top: 0;">Vivendo com a melhor pessoa do mundo há...</h2>
+            <div id="timer">
+                <div class="timer-unit"><span id="anos">0</span>Anos</div>
+                <div class="timer-unit"><span id="meses">0</span>Meses</div>
+                <div class="timer-unit"><span id="dias">0</span>Dias</div>
+                <div class="timer-unit"><span id="horas">0</span>Hrs</div>
+                <div class="timer-unit"><span id="minutos">0</span>Min</div>
+                <div class="timer-unit"><span id="segundos">0</span>Seg</div>
+            </div>
+        </div>
+
+        <div class="card-texto" style="margin-top: 60px;">
             <p class="texto-principal">
-                "Você é o meu refúgio e o meu sonho realizado. Saiba que eu te amo demais de verdade mesmo 💕 Lembro de cada momento dessas fotos para viver com você..."
+                "Você é o meu refúgio e o meu sonho realizado. Saiba que eu te amoo dms de vdd mesmo Lembro de cada momento dessas fotos para viver com você..."
             </p>
         </div>
 
@@ -123,10 +409,15 @@
             <div class="foto-item"><img src="https://i.ibb.co/twBbJNRt/twBbJNRt.png"><p class="legenda-foto">Amor infinito</p></div>
         </div>
 
-        <div class="bloco-promessa">
-            <h2 style="font-family: 'Dancing Script'; color: var(--rosa); text-align: center; font-size: 2.5rem;">Nossa Promessa ❤️</h2>
-            <p class="texto-principal" style="font-style: normal; text-align: justify;">
-                Amor, eu te amo tanto, mas tanto mesmo, que eu faria de tudo pra ter você ao meu lado. Eu não consigo me imaginar sem você, porque você é o amor da minha vida. Eu quero continuar com você até onde Deus permitir, ou até onde você quiser… mas por mim, eu nunca vou te deixar.
+        <button id="forca-btn">
+            <span class="coracao-icon">❤️</span> 
+            Uma Surpresa para Você, Amor 💝
+        </button>
+
+        <div class="carta-amor">
+            <h2 style="font-family: 'Dancing Script'; color: var(--violeta-vibrante);">Nossa Promessa ❤️</h2>
+            <p class="texto-principal">
+                "Amor, eu te amo tanto, mas tanto mesmo, que eu faria de tudo pra ter você ao meu lado. Eu não consigo me imaginar sem você, porque você é o amor da minha vida. Eu quero continuar com você até onde Deus permitir, ou até onde você quiser… mas por mim, eu nunca vou te deixar.
                 <br><br>
                 Eu sonho com a gente construindo tudo juntos: casar, ter nossa família, nossa casa… eu sei que não é fácil, mas eu acredito de verdade que a gente consegue, juntos. Quero mostrar pro mundo que um amor de adolescência pode sim dar certo quando existe esforço dos dois lados.
                 <br><br>
@@ -136,16 +427,37 @@
                 <br><br>
                 Eu quero que a gente dê certo, que a gente evite brigas, que a gente se entenda mais. Porque acima de tudo isso… eu te amo demais. Isso que estamos passando é só uma fase, e eu sei que a gente vai superar.
                 <br><br>
-                Eu não posso te perder… você é o amor da minha vida. ❤️
+                Eu não posso te perder… você é o amor da minha vida. ❤️"
+            </p>
+            <p style="text-align: right; font-family: 'Dancing Script'; font-size: 2.2rem; color: var(--violeta-vibrante); margin-bottom: 0;">
+                Com todo o meu amor, Netinho.
             </p>
         </div>
 
-        <div class="card-texto" style="margin-top: 40px;">
+        <div class="card-texto" style="margin-top: 0; background: #fff;">
             <p class="texto-principal">
-                "A melhor hora do meu dia é quando estamos conversando... Um beijão do Netinho, eu te amo Beca 💕🫶🏽"
+                "A melhor hora do meu dia é quando estamos conversando e também me sinto tão bem qnd te vejo e ficamos juntos slk... Um beijão do Netinho, eu te amoo Beca 💕🫶🏽"
             </p>
         </div>
 
+    </div>
+
+    <div id="forca-modal">
+        <div id="modal-content">
+            <span id="close-modal">&times;</span>
+            <div class="forca-pergunta">Meu dia melhora quando... 🤔</div>
+            
+            <div class="forca-palavra" id="palavra-forca">
+                _ _ _ _ _ _ _ &nbsp; _ _ _ &nbsp; _ _ _ _ _
+            </div>
+            
+            <p id="forca-erros" style="color: #c00; font-weight: bold; margin-bottom: 10px;"></p>
+
+            <div class="teclado" id="teclado-forca">
+                </div>
+            
+            <div class="mensagem-vitoria" id="mensagem-vitoria">Eu Te Amo ❤️💎</div>
+            </div>
     </div>
 
     <footer>
@@ -156,13 +468,18 @@
     <script>
         var player;
         var videoId = 'Dwsd8SePKOs'; 
+
+        // Função chamada quando a API do YouTube está pronta
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
                 height: '0', width: '0', videoId: videoId,
-                playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': videoId, 'controls': 0, 'start': 24 },
+                playerVars: { 
+                    'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': videoId, 'start': 24 
+                },
                 events: { 'onReady': onPlayerReady }
             });
         }
+
         function onPlayerReady(event) {
             document.getElementById('playBtn').addEventListener('click', function() {
                 player.playVideo();
@@ -170,13 +487,139 @@
                 setTimeout(() => {
                     document.getElementById('overlay').style.display = 'none';
                     document.getElementById('conteudo').style.display = 'block';
+                    startTimer(); // Inicia o contador
+                    initializeForca(); // Inicia o jogo da forca
                 }, 1500);
             });
+        }
+
+        // --- CONTADOR EM TEMPO REAL ---
+        function startTimer() {
+            // Data do Início do Namoro: 22 de Dezembro de 2024 (Mes 11, pois começa em 0)
+            const dataInicio = new Date(2024, 11, 22, 0, 0, 0); 
+
+            setInterval(() => {
+                const agora = new Date();
+                const diff = agora - dataInicio;
+
+                // Cálculo exato
+                let anos = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+                let diffAposAnos = diff % (1000 * 60 * 60 * 24 * 365);
+                let meses = Math.floor(diffAposAnos / (1000 * 60 * 60 * 24 * 30.436875)); // Meses médios
+                let dias = Math.floor((diffAposAnos % (1000 * 60 * 60 * 24 * 30.436875)) / (1000 * 60 * 60 * 24));
+                let horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                let minutos = Math.floor((diff / 1000 / 60) % 60);
+                let segundos = Math.floor((diff / 1000) % 60);
+
+                // Atualiza o contador na tela
+                document.getElementById('anos').innerText = anos;
+                document.getElementById('meses').innerText = meses;
+                document.getElementById('dias').innerText = dias;
+                document.getElementById('horas').innerText = horas;
+                document.getElementById('minutos').innerText = minutos;
+                document.getElementById('segundos').innerText = segundos;
+            }, 1000); // Atualiza a cada segundo
+        }
+
+        // --- JOGO DA FORCA ---
+        const palavraSecreta = "ESTOU COM VOCE"; 
+        const palavraArray = palavraSecreta.split("");
+        let palavraExibidaArray = palavraArray.map(char => (char === " " ? "&nbsp;" : "_"));
+        const tentativasPermitidas = 6;
+        let tentativasUsadas = 0;
+        let letrasTentadas = [];
+
+        function initializeForca() {
+            // Gerar Teclado
+            const tecladoDiv = document.getElementById('teclado-forca');
+            tecladoDiv.innerHTML = "";
+            const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            letras.split("").forEach(letra => {
+                const button = document.createElement('button');
+                button.innerText = letra;
+                button.classList.add('tecla');
+                button.onclick = () => verificarLetra(letra, button);
+                tecladoDiv.appendChild(button);
+            });
+
+            // Exibir espaços da palavra (com formatação correta)
+            updatePalavra();
+
+            // Abrir Modal
+            document.getElementById('forca-btn').onclick = function() {
+                document.getElementById('forca-modal').style.display = 'flex';
+            };
+
+            // Fechar Modal
+            document.getElementById('close-modal').onclick = function() {
+                document.getElementById('forca-modal').style.display = 'none';
+            };
+        }
+
+        function verificarLetra(letra, button) {
+            if (letrasTentadas.includes(letra)) return; // Já foi clicada
+            letrasTentadas.push(letra);
+            button.classList.add('disabled'); // Desativa o botão
+
+            if (palavraSecreta.includes(letra)) {
+                // Acertou a letra
+                button.classList.add('disabled');
+                palavraArray.forEach((char, index) => {
+                    if (char === letra) {
+                        palavraExibidaArray[index] = letra;
+                    }
+                });
+                updatePalavra();
+                verificarVitoria();
+            } else {
+                // Errou a letra
+                tentativasUsadas++;
+                button.classList.add('checked-wrong');
+                document.getElementById('forca-erros').innerText = "Erros: " + tentativasUsadas + "/" + tentativasPermitidas + " 😢";
+                verificarDerrota();
+            }
+        }
+
+        function updatePalavra() {
+            const spaces = ["_ _ _ _ _ _ _", "_ _ _", "_ _ _ _ _"]; // Formato visual (sem quebra de linha)
+            let currentPalavraVisual = palavraExibidaArray.join(" ");
+            // Substituir os espaços médios por espaço visual extra para alinhar as palavras
+            currentPalavraVisual = currentPalavraVisual.replace(/\s\s/g, " &nbsp; ");
+            document.getElementById('palavra-forca').innerHTML = currentPalavraVisual;
+        }
+
+        function verificarVitoria() {
+            if (!palavraExibidaArray.includes("_")) {
+                // Vitória!
+                document.getElementById('teclado-forca').style.display = 'none';
+                document.getElementById('forca-pergunta').innerText = "Acertou! ❤️💎";
+                document.getElementById('forca-erros').innerText = "";
+                document.getElementById('mensagem-vitoria').style.display = 'block';
+                showVictoryHearts(); // Efeito de corações
+            }
+        }
+
+        function verificarDerrota() {
+            if (tentativasUsadas >= tentativasPermitidas) {
+                document.getElementById('teclado-forca').style.display = 'none';
+                document.getElementById('forca-erros').innerText = "Acabaram as tentativas! 🥲 A resposta era: ESTOU COM VOCE";
+            }
+        }
+
+        function showVictoryHearts() {
+            // Criar e mostrar corações subindo
+            for (let i = 0; i < 20; i++) {
+                const coracao = document.createElement('span');
+                coracao.innerText = '❤️';
+                coracao.classList.add('coracao-vitoria');
+                coracao.style.left = (30 + Math.random() * 40) + "%"; // Posição randômica
+                coracao.style.animationDelay = (Math.random() * 2) + "s"; // Delay randômico
+                document.getElementById('modal-content').appendChild(coracao);
+                coracao.style.display = 'block';
+            }
         }
     </script>
 </body>
 </html>
-
-
 
 
