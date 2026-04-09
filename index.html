@@ -1,320 +1,301 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beca ❤️ Neto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beca e Neto: Nosso Universo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        :root {
+            --roxo-fundo: #2e004f;
+            --vinho-preto: linear-gradient(135deg, #4a0000 0%, #0a001a 100%);
+            --rosa-brilhante: #ff1493;
+            --vermelho-paixao: #ff0000;
+            --dourado-glow: #ffd700;
+            --marrom-jogo: #7a1b1b;
+            --branco: #ffffff;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        * { box-sizing: border-box; }
+        body { 
+            margin: 0; padding: 0; font-family: 'Poppins', sans-serif; 
+            background: radial-gradient(ellipse at bottom, #2e004f 0%, #0a001a 100%); color: var(--branco); overflow-x: hidden;
+        }
 
-<style>
-body{
-margin:0;
-font-family:'Poppins',sans-serif;
-background:radial-gradient(circle at bottom,#2e004f,#000);
-color:#fff;
-overflow-x:hidden;
-}
+        /* TELA DE ENTRADA */
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(-45deg, #8a2be2, #ff1493, #ff0000);
+            background-size: 400% 400%; z-index: 9999; display: flex; 
+            flex-direction: column; justify-content: center; align-items: center; 
+            transition: opacity 1.2s ease; animation: gradientMestico 10s ease infinite;
+            overflow: hidden;
+        }
 
-/* OVERLAY */
-#overlay{
-position:fixed;
-width:100%;
-height:100%;
-background:linear-gradient(45deg,#ff1493,#8a2be2,#ff0000);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
+        @keyframes gradientMestico {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-#overlay h1{
-font-family:'Dancing Script';
-font-size:3rem;
-}
+        .balloon {
+            position: absolute; bottom: -100px; font-size: 2.5rem;
+            animation: balloonRise 6s linear infinite; pointer-events: none; opacity: 0.6; z-index: -1;
+        }
 
-#playBtn{
-padding:15px 40px;
-border:none;
-border-radius:40px;
-font-size:1.2rem;
-cursor:pointer;
-}
+        @keyframes balloonRise {
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.6; }
+            100% { transform: translateY(-120vh) scale(1.3) rotate(360deg); opacity: 0; }
+        }
 
-/* MAIN */
-.container{
-max-width:500px;
-margin:auto;
-padding:20px;
-display:none;
-text-align:center;
-}
+        #titulo-overlay {
+            font-family: 'Dancing Script', cursive; font-size: 5rem; color: var(--dourado-glow);
+            margin: 0; text-shadow: 0 0 20px var(--dourado-glow), 0 0 40px var(--vermelho-paixao);
+            text-align: center;
+        }
 
-/* CONTADOR */
-.frase-contador{
-font-family:'Dancing Script';
-font-size:1.8rem;
-color:#ffd700;
-margin-bottom:10px;
-}
+        #tema-overlay {
+            font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--dourado-glow);
+            margin: 10px 0 50px 0; text-shadow: 0 0 10px var(--branco); text-align: center;
+        }
 
-.timer{
-display:flex;
-justify-content:center;
-gap:10px;
-margin-bottom:30px;
-}
+        #playBtn {
+            background: var(--branco); color: var(--roxo-fundo); border: none; padding: 20px 60px;
+            font-size: 1.6rem; border-radius: 60px; cursor: pointer; font-weight: 600;
+            animation: buttonPulse 2s infinite; transition: 0.4s;
+        }
 
-.timer div{
-background:rgba(255,255,255,0.1);
-padding:10px;
-border-radius:10px;
-}
+        /* CONTEÚDO PRINCIPAL */
+        .container { max-width: 500px; margin: 0 auto; padding: 20px; display: none; text-align: center; }
 
-/* TEXTO */
-.texto{
-background:#fff;
-color:#2e004f;
-padding:20px;
-border-radius:15px;
-text-align:justify;
-line-height:1.6;
-margin-top:20px;
-}
+        .caixa-contador {
+            background: linear-gradient(145deg, #4a0000 0%, #000000 100%);
+            padding: 25px 15px; border-radius: 25px; border: 2px solid rgba(255, 215, 0, 0.3);
+            margin-bottom: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+        }
 
-/* BOTAO */
-#btnGame{
-background:#ff1493;
-border:none;
-width:70px;
-height:70px;
-border-radius:50%;
-font-size:2rem;
-color:#fff;
-margin-top:20px;
-}
+        .texto-contador {
+            font-family: 'Dancing Script', cursive; color: var(--dourado-glow);
+            font-size: 1.8rem; margin-bottom: 15px; display: block;
+        }
 
-/* 🎮 JOGO */
-#modalGame{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:radial-gradient(circle,#2e004f,#000);
-color:#fff;
-z-index:10000;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-overflow:hidden;
-}
+        .timer-display { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .unit { background: rgba(0, 0, 0, 0.4); padding: 10px 5px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .unit span { display: block; font-size: 1.5rem; font-weight: bold; color: var(--branco); }
+        .unit label { font-size: 0.6rem; color: #aaa; text-transform: uppercase; }
 
-.star{
-position:absolute;
-width:2px;
-height:2px;
-background:#fff;
-animation:twinkle 2s infinite alternate;
-}
+        /* CARDS DE TEXTO */
+        .text-card {
+            background: var(--branco); color: #333; padding: 25px; border-radius: 20px;
+            margin-bottom: 30px; text-align: justify; line-height: 1.7;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); border-left: 8px solid var(--rosa-brilhante);
+        }
+        .text-card h2 { font-family: 'Dancing Script', cursive; color: var(--roxo-fundo); text-align: center; margin-top: 0; }
 
-@keyframes twinkle{
-from{opacity:0.2;}
-to{opacity:1;}
-}
+        /* LIVRINHO */
+        .swiper { width: 100%; height: 420px; margin-bottom: 40px; }
+        .swiper-slide {
+            background: var(--branco); border-radius: 15px; border: 8px solid var(--branco);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4); overflow: hidden;
+        }
+        .swiper-slide img { width: 100%; height: 82%; object-fit: cover; }
+        .legenda { color: var(--roxo-fundo); font-family: 'Dancing Script', cursive; font-size: 1.3rem; padding: 10px; }
 
-.slot{
-width:30px;
-height:40px;
-border-bottom:2px solid #fff;
-font-size:1.5rem;
-text-align:center;
-margin:5px;
-}
+        /* SEÇÃO DE TEXTOS ABAIXO DAS FOTOS */
+        .secao-texto { margin-bottom: 40px; }
+        .texto-intro-fotos {
+            background: rgba(255, 255, 255, 0.1); color: #fff;
+            padding: 20px; border-radius: 15px; margin-bottom: 15px;
+            font-style: italic; border: 1px dashed var(--rosa-brilhante);
+        }
+        .texto-destaque {
+            background: linear-gradient(to right, #ffffff, #ffeef8); color: #2e004f;
+            padding: 25px; border-radius: 20px; font-size: 1.1rem; font-weight: 600;
+            border-bottom: 5px solid var(--vermelho-paixao); box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
 
-.keyboard{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:10px;
-margin-top:20px;
-}
+        #btnGame {
+            background: var(--rosa-brilhante); color: var(--branco); border: none; width: 75px; height: 75px;
+            border-radius: 50%; font-size: 2.2rem; cursor: pointer; margin-bottom: 30px;
+            box-shadow: 0 0 20px var(--rosa-brilhante);
+        }
 
-.key{
-background:#ff1493;
-border:none;
-width:50px;
-height:50px;
-border-radius:10px;
-color:#fff;
-font-weight:bold;
-}
+        /* JOGO */
+        #modalGame {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--branco); z-index: 10000; flex-direction: column; align-items: center; justify-content: center;
+            color: #333; padding: 20px;
+        }
+        .slots { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+        .slot { width: 28px; height: 38px; border-bottom: 2px solid #333; font-size: 1.4rem; font-weight: bold; text-align: center; }
+        .keyboard { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+        .key {
+            background: var(--marrom-jogo); color: var(--branco); border: none; width: 45px; height: 45px;
+            border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+        }
+        .key.off { visibility: hidden; }
+        #win { display: none; font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--rosa-brilhante); text-align: center; }
 
-.key.off{
-opacity:0.3;
-}
-
-.heart{
-position:absolute;
-bottom:0;
-font-size:1.5rem;
-animation:subir 3s linear forwards;
-}
-
-@keyframes subir{
-to{
-transform:translateY(-100vh);
-opacity:0;
-}
-}
-
-#win{
-display:none;
-font-family:'Dancing Script';
-font-size:3rem;
-color:#ff1493;
-text-shadow:0 0 20px #ff1493;
-margin-top:20px;
-}
-</style>
+        #yt { position: absolute; top: -999px; }
+    </style>
 </head>
-
 <body>
 
+<div id="yt"></div>
+
 <div id="overlay">
-<h1>Beca ❤️ Neto</h1>
-<button id="playBtn" onclick="startApp()">Entrar 💕</button>
+    <h1 id="titulo-overlay">Beca e Neto</h1>
+    <p id="tema-overlay">Eu Te Amo, Meu Amor, Cada Dia Mais ❤️💎</p>
+    <button id="playBtn" onclick="startApp()">Nosso Amor 💕</button>
 </div>
 
 <div class="container" id="main">
+    <div class="caixa-contador">
+        <span class="texto-contador">Estou vivendo com você desde...</span>
+        <div class="timer-display">
+            <div class="unit"><span id="aa">0</span><label>Anos</label></div>
+            <div class="unit"><span id="mm">0</span><label>Meses</label></div>
+            <div class="unit"><span id="dd">0</span><label>Dias</label></div>
+            <div class="unit"><span id="hh">0</span><label>Horas</label></div>
+            <div class="unit"><span id="mi">0</span><label>Min</label></div>
+            <div class="unit"><span id="ss">0</span><label>Seg</label></div>
+        </div>
+    </div>
 
-<!-- FRASE CONTADOR -->
-<div class="frase-contador">
-Vivendo nosso sonho desde...
+    <div class="text-card">
+        <h2>Beca, minha vida ❤️</h2>
+        <p>Amor, desde o dia 01/12/2024, quando a gente se viu pela primeira vez, eu nunca mais fui o mesmo. Foi ali que tudo começou, e desde aquele momento eu me apaixonei por você de um jeito tão forte, tão verdadeiro, que eu sei que isso nunca vai acabar. Só cresce… cada dia mais. <br><br>
+        A gente já viveu tanta coisa juntos, né? Momentos bons, difíceis, tudo… mas sabe o que é mais lindo? Mesmo assim, eu nunca pensei em desistir da gente. Porque você é tudo pra mim, meu amor. Eu te amo num nível que nem sei explicar direito, só sei sentir… e sentir muito. <br><br>
+        Eu só quero te fazer feliz, cuidar de você, estar do teu lado em tudo, literalmente tudo. Quero viver mil momentos com você ainda, realizar nossos sonhos juntos e olhar pra trás um dia e ver que a gente conseguiu, que a gente venceu tudo junto. <br><br>
+        E eu fico imaginando o nosso futuro… o dia que nosso namoro vai ser aceito pelos seus pais, a gente podendo viver tranquilo, feliz, sem medo nenhum. Eu sonho tanto com isso, você não tem ideia. Eu quero viver isso com você, quero construir nossa família, crescer contigo… e se Deus permitir, casar com você e morar juntinho, vivendo a nossa vida do jeitinho que a gente sempre sonhou. <br><br>
+        Eu amo você de verdade, minha Beca. Pra sempre. Você sempre vai ser minha, e eu sempre vou ser o seu Netinho — chato, irritante, grudado, mas completamente apaixonado por você, do jeito mais sincero que existe. <br><br>
+        <b>Eu te amo mais do que tudo, minha menina 🤍</b></p>
+    </div>
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://i.ibb.co/Y45tbVcC/Y45tbVcC.png"><div class="legenda">Viver com você</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/ZRDKgR50/ZRDKgR50.png"><div class="legenda">Nosso brilho</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/kvV3vKT/kvV3vKT.png"><div class="legenda">Sempre nós</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/zHXckYgP/zHXckYgP.png"><div class="legenda">Porto Seguro</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/8gy0W39H/8gy0W39H.png"><div class="legenda">Florescendo</div></div>
+            <div class="swiper-slide"><img src="https://i.ibb.co/m5LN0zrt/m5LN0zrt.png"><div class="legenda">Minha Vida</div></div>
+        </div>
+    </div>
+
+    <div class="secao-texto">
+        <div class="texto-intro-fotos">
+            "Essas fotos são para guardar as nossas melhores lembranças, cada sorriso e cada momento que passamos juntos. É o registro do nosso amor que cresce a cada dia."
+        </div>
+        <div class="texto-destaque">
+            "Cada foto dessa é um pedaço da nossa felicidade. Eu olho pra elas e vejo o quanto a gente combina e o quanto eu quero que isso nunca acabe."
+        </div>
+    </div>
+
+    <button id="btnGame" onclick="openGame()">❤️</button>
+
+    <div class="text-card">
+        <h2>Nossa Promessa ❤️</h2>
+        <p>Amor, eu te amo tanto, mas tanto mesmo, que eu faria de tudo pra ter você ao meu lado. Eu não consigo me imaginar sem você, porque você é o amor da minha vida. Eu quero continuar com você até onde Deus permitir, ou até onde você quiser… mas por mim, eu nunca vou te deixar. <br><br> Eu sonho com a gente construindo tudo juntos: casar, ter nossa família, nossa casa… eu sei que não é fácil, mas eu acredito de verdade que a gente consegue, juntos. Quero mostrar pro mundo que um amor de adolescência pode sim dar certo quando existe esforço dos dois lados. <br><br> Eu escolhi você pra minha vida. Eu não quero ninguém além de você, é só você que eu quero. E mesmo quando eu fico chateado, é porque às vezes eu sinto que você não valoriza tudo que eu faço, todo o amor e carinho que eu te dou… e isso me machuca. Mas mesmo assim, eu não desisto da gente. <br><br> Eu acredito que a gente pode melhorar, crescer juntos, aprender um com o outro. Eu sei que você tem capacidade, e eu também tenho. Me desculpa por todos os meus erros, por tudo que já te fez chorar ou te magoou. De verdade, me perdoa… eu quero ser uma pessoa melhor pra você. <br><br> Eu quero que a gente dê certo, que a gente evite brigas, que a gente se entenda mais. Porque acima de tudo isso… eu te amo demais. Isso que estamos passando é só uma fase, e eu sei que a gente vai superar. <br><br> Eu não posso te perder… você é o amor da minha vida. ❤️</p>
+    </div>
+
+    <div class="text-card">
+        <p>A melhor hora do meu dia é quando estamos conversando e também me sinto tão bem qnd te vejo e ficamos juntos slk... Um beijão do Netinho, eu te amoo Beca 💕🫶🏽</p>
+    </div>
 </div>
 
-<!-- CONTADOR -->
-<div class="timer">
-<div id="dd">0</div>
-<div id="hh">0</div>
-<div id="mm">0</div>
-<div id="ss">0</div>
-</div>
-
-<button id="btnGame" onclick="openGame()">❤️</button>
-
-<!-- TEXTO -->
-<div class="texto">
-<p><b>Beca, minha vida,</b></p>
-
-<p>Amor, desde o dia <b>01/12/2024</b>, quando a gente se viu pela primeira vez, eu nunca mais fui o mesmo. Foi ali que tudo começou, e desde aquele momento eu me apaixonei por você de um jeito tão forte, tão verdadeiro, que eu sei que isso nunca vai acabar. Só cresce… cada dia mais.</p>
-
-<p>A gente já viveu tanta coisa juntos, né? Momentos bons, difíceis, tudo… mas sabe o que é mais lindo? Mesmo assim, eu nunca pensei em desistir da gente. Porque você é tudo pra mim, meu amor. Eu te amo num nível que nem sei explicar direito, só sei sentir… e sentir muito.</p>
-
-<p>Eu só quero te fazer feliz, cuidar de você, estar do teu lado em tudo. Quero viver mil momentos com você ainda e realizar nossos sonhos juntos.</p>
-
-<p>Eu sonho com o nosso futuro, com tudo dando certo, com a gente feliz e em paz… e se Deus permitir, casar com você e viver nossa vida juntinhos.</p>
-
-<p><b>Eu te amo mais do que tudo, minha menina 🤍</b></p>
-</div>
-
-</div>
-
-<!-- JOGO -->
 <div id="modalGame">
-<h2>único lugar que eu me sinto seguro e confortável.</h2>
-
-<div style="display:flex;flex-wrap:wrap;justify-content:center;">
-<div class="slot"></div><div class="slot"></div><div class="slot"></div>
-<div style="width:100%"></div>
-<div class="slot"></div><div class="slot"></div><div class="slot"></div>
-<div style="width:100%"></div>
-<div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+    <h3 style="margin-bottom: 15px;">meu dia melhora quando</h3>
+    <div class="slots" id="slotsArea">
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div style="width:100%"></div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div style="width:100%"></div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+    </div>
+    <div class="keyboard" id="keysArea"></div>
+    <div id="win">Eu Te Amo ❤️💎</div>
 </div>
 
-<div class="keyboard" id="keysArea"></div>
-
-<div id="win">EU TE AMO ❤️</div>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-function startApp(){
-overlay.style.display="none";
-main.style.display="block";
-}
+    const overlay = document.getElementById('overlay');
+    function createBalloon() {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon';
+        balloon.innerHTML = Math.random() > 0.5 ? '❤️' : '💖';
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.color = Math.random() > 0.5 ? 'var(--vermelho-paixao)' : 'var(--rosa-brilhante)';
+        balloon.style.animationDuration = Math.random() * 3 + 4 + 's';
+        overlay.appendChild(balloon);
+        setTimeout(() => { balloon.remove(); }, 7000);
+    }
+    setInterval(createBalloon, 400);
 
-/* contador */
-const start=new Date("2024-12-01");
+    var swiper = new Swiper(".mySwiper", { effect: "cards", grabCursor: true, loop: true });
 
-setInterval(()=>{
-let d=new Date()-start;
-dd.innerText=Math.floor(d/86400000);
-hh.innerText=Math.floor(d/3600000)%24;
-mm.innerText=Math.floor(d/60000)%60;
-ss.innerText=Math.floor(d/1000)%60;
-},1000);
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('yt', { videoId: 'Dwsd8SePKOs', playerVars: { 'autoplay': 0, 'start': 24, 'playlist': 'Dwsd8SePKOs', 'loop': 1 } });
+    }
 
-/* estrelas */
-function criarEstrelas(){
-for(let i=0;i<80;i++){
-let s=document.createElement("div");
-s.className="star";
-s.style.left=Math.random()*100+"vw";
-s.style.top=Math.random()*100+"vh";
-modalGame.appendChild(s);
-}
-}
+    function startApp() {
+        if(player && player.playVideo) player.playVideo();
+        document.getElementById('overlay').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('main').style.display = 'block';
+            iniciarContador();
+        }, 1200);
+    }
 
-/* jogo */
-const sol="COMVOCE";
-const emb=["M","C","O","V","C","O","Ê"];
-let hit=0;
+    function iniciarContador() {
+        const start = new Date("2024-12-01T00:00:00");
+        setInterval(() => {
+            const now = new Date();
+            const d = now - start;
+            document.getElementById('aa').innerText = Math.floor(d / 31536000000);
+            document.getElementById('mm').innerText = Math.floor((d % 31536000000) / 2628000000);
+            document.getElementById('dd').innerText = Math.floor((d % 2628000000) / 86400000);
+            document.getElementById('hh').innerText = Math.floor((d % 86400000) / 3600000);
+            document.getElementById('mi').innerText = Math.floor((d % 3600000) / 60000);
+            document.getElementById('ss').innerText = Math.floor((d % 60000) / 1000);
+        }, 1000);
+    }
 
-function openGame(){
-modalGame.style.display="flex";
-criarEstrelas();
+    const sol = "ESTOUCOMVOCE";
+    const emb = ["M", "C", "O", "V", "C", "O", "Ê", "E", "S", "T", "O", "U"];
+    let hit = 0;
 
-keysArea.innerHTML="";
-
-emb.forEach(l=>{
-let b=document.createElement("button");
-b.className="key";
-b.innerText=l;
-
-b.onclick=()=>{
-let ln=l.normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-let sn=sol[hit];
-
-if(ln===sn){
-document.querySelectorAll(".slot")[hit].innerText=l;
-b.classList.add("off");
-hit++;
-
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤️";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-
-if(hit===sol.length){
-win.style.display="block";
-
-setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💖";
-h.style.left=Math.random()*100+"vw";
-document.body.appendChild(h);
-},200);
-}
-}
-};
-
-keysArea.appendChild(b);
-});
-}
+    function openGame() {
+        document.getElementById('modalGame').style.display = 'flex';
+        const k = document.getElementById('keysArea');
+        k.innerHTML = "";
+        emb.forEach(l => {
+            let b = document.createElement("button");
+            b.className = "key"; b.innerText = l;
+            b.onclick = () => {
+                let ln = l.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+                let sn = sol[hit].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+                if(ln === sn) {
+                    document.querySelectorAll('.slot')[hit].innerText = l;
+                    b.classList.add('off');
+                    hit++;
+                    if(hit === sol.length) {
+                        document.getElementById('win').style.display = 'block';
+                        setInterval(() => {
+                            let h = document.createElement("div"); h.className = "h-float"; h.innerHTML = "❤️";
+                            h.style.left = Math.random() * 100 + "vw"; document.body.appendChild(h);
+                        }, 200);
+                        setTimeout(() => document.getElementById('modalGame').style.display='none', 5000);
+                    }
+                }
+            };
+            k.appendChild(b);
+        });
+    }
 </script>
-
 </body>
 </html>
