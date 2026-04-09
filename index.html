@@ -3,135 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beca e Neto: Nossa História</title>
+    <title>Beca e Neto</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         :root {
-            --roxo-universo: #1a0033;
-            --vinho-preto: linear-gradient(145deg, #4d0000, #1a0000); /* Vermelho misturado com preto */
-            --rosa-brilho: #ff1493;
-            --ouro: #ffd700;
+            --roxo-fundo: #1a0033;
+            --vinho-preto: linear-gradient(135deg, #3a0000 0%, #000000 100%);
+            --rosa: #ff1493;
+            --marrom-jogo: #7a1b1b;
         }
 
+        * { box-sizing: border-box; }
         body { 
             margin: 0; padding: 0; font-family: 'Poppins', sans-serif; 
-            background-color: var(--roxo-universo); color: white; overflow-x: hidden;
+            background: var(--roxo-fundo); color: white; overflow-x: hidden;
         }
 
-        /* ESTRELAS NO FUNDO */
-        .star-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: radial-gradient(circle at center, #2e004f 0%, #000 100%);
-        }
-        .star {
-            position: absolute; background: white; border-radius: 50%;
-            opacity: 0.3; animation: blink var(--d) infinite;
-        }
-        @keyframes blink { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+        /* FUNDO DE ESTRELAS */
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle, #2e004f 0%, #05000a 100%); }
+        .star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: twinkle var(--t) infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-        /* OVERLAY */
+        /* TELA DE ENTRADA */
         #overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #4d0000, #2e004f);
-            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 1s;
+            background: linear-gradient(45deg, #8a2be2, #ff1493);
+            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.5s;
         }
         #playBtn {
-            background: white; color: #4d0000; border: none; padding: 18px 45px;
-            font-size: 1.6rem; border-radius: 50px; cursor: pointer; font-family: 'Dancing Script'; font-weight: bold;
-            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            background: white; color: #ff1493; border: none; padding: 15px 40px;
+            font-size: 1.5rem; border-radius: 50px; cursor: pointer; font-family: 'Dancing Script'; font-weight: bold;
         }
 
-        .container { display: none; max-width: 500px; margin: 0 auto; padding: 20px; text-align: center; }
+        .container { display: none; max-width: 450px; margin: 0 auto; padding: 15px; text-align: center; }
 
-        /* CONTADOR PROFISSIONAL (VERMELHO + PRETO) */
-        .caixa-contador {
-            background: var(--vinho-preto);
-            padding: 30px 15px; border-radius: 25px;
-            border: 2px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-            margin: 20px 0 40px;
+        /* CONTADOR */
+        .timer-card {
+            background: var(--vinho-preto); padding: 25px 10px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 20px 0;
         }
-        .caixa-contador h2 { 
-            font-family: 'Dancing Script'; color: var(--ouro); 
-            margin: 0 0 20px 0; font-size: 1.8rem; letter-spacing: 1px;
-        }
-        .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-        .time-block {
-            background: rgba(0, 0, 0, 0.4); padding: 12px 5px; border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .time-block span { display: block; font-size: 1.8rem; font-weight: 700; color: #fff; text-shadow: 0 0 10px var(--rosa-brilho); }
-        .time-block label { font-size: 0.65rem; color: #bbb; text-transform: uppercase; letter-spacing: 1px; }
+        .timer-card h2 { font-family: 'Dancing Script'; color: var(--rosa); font-size: 1.6rem; margin-bottom: 15px; }
+        .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .t-unit { background: rgba(0,0,0,0.5); padding: 10px 2px; border-radius: 10px; }
+        .t-unit span { display: block; font-size: 1.4rem; font-weight: bold; }
+        .t-unit label { font-size: 0.6rem; color: #aaa; text-transform: uppercase; }
 
-        /* LIVRINHO DE FOTOS */
-        .swiper { width: 100%; height: 460px; margin-bottom: 40px; }
+        /* LIVRINHO DE FOTOS CORRIGIDO */
+        .swiper { width: 100%; max-width: 320px; height: 400px; margin: 20px auto; }
         .swiper-slide {
-            background: white; border-radius: 15px; border: 8px solid white;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6); overflow: hidden;
+            background: white; border-radius: 15px; border: 6px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4); overflow: hidden;
         }
         .swiper-slide img { width: 100%; height: 82%; object-fit: cover; }
-        .legenda { color: #1a0000; font-family: 'Dancing Script'; font-size: 1.4rem; padding: 12px; }
+        .legenda { color: #1a0033; font-family: 'Dancing Script'; font-size: 1.2rem; padding: 5px; }
 
-        /* BOTÃO ❤️ */
-        #gameTrigger {
-            background: #ff1493; border: none; width: 85px; height: 85px;
-            border-radius: 50%; font-size: 2.5rem; cursor: pointer; margin: 0 auto 40px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); transition: 0.3s;
+        /* BOTÃO DO JOGO */
+        #btnGame {
+            background: var(--rosa); border: none; width: 70px; height: 70px;
+            border-radius: 50%; font-size: 2rem; cursor: pointer; margin-bottom: 30px;
+            box-shadow: 0 0 15px var(--rosa);
         }
-        #gameTrigger:hover { transform: scale(1.1) rotate(10deg); }
 
-        /* TEXTOS */
-        .bloco-texto {
-            background: white; color: #222; padding: 35px; border-radius: 30px;
-            margin-bottom: 30px; text-align: justify; line-height: 1.7;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3); border-right: 8px solid #4d0000;
+        /* CAIXINHAS DE TEXTO TAMANHO MÉDIO */
+        .text-card {
+            background: white; color: #333; padding: 20px; border-radius: 15px;
+            margin-bottom: 20px; text-align: justify; line-height: 1.5; font-size: 0.95rem;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2); border-left: 6px solid var(--rosa);
         }
-        .bloco-texto h2 { font-family: 'Dancing Script'; color: #4d0000; text-align: center; margin-top: 0; }
+        .text-card h2 { font-family: 'Dancing Script'; color: var(--roxo-fundo); text-align: center; font-size: 1.5rem; margin-top: 0; }
 
-        /* MODAL JOGO */
+        /* MODAL DO JOGO CORRIGIDO */
         #modalGame {
-            display: none; position: fixed; top:0; left:0; width:100%; height:100%;
-            background: white; z-index: 10000; flex-direction: column; align-items: center; padding-top: 60px; color: #222;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff; z-index: 10000; flex-direction: column; align-items: center; justify-content: center;
+            color: #333; padding: 20px;
         }
-        .slot-area { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
-        .slot-box { width: 28px; height: 40px; border-bottom: 3px solid #4d0000; font-size: 1.6rem; font-weight: bold; text-align: center; }
-        .key-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-        .key-btn {
-            background: #7a1b1b; color: white; border: none; width: 48px; height: 48px;
-            border-radius: 8px; font-size: 1.2rem; font-weight: bold;
+        .slot-container { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+        .slot { width: 25px; height: 35px; border-bottom: 2px solid #333; font-size: 1.3rem; font-weight: bold; text-align: center; }
+        .keyboard { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+        .key {
+            background: var(--marrom-jogo); color: white; border: none; width: 42px; height: 42px;
+            border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
         }
-        .key-btn.used { visibility: hidden; }
-        #winMsg { display: none; font-family: 'Dancing Script'; font-size: 3.5rem; color: #ff1493; margin-top: 20px; }
-        
-        .floating-heart { position: fixed; bottom: -50px; animation: floatUp 3s forwards; font-size: 2rem; pointer-events: none; }
-        @keyframes floatUp { to { transform: translateY(-110vh); opacity: 0; } }
+        .key.off { visibility: hidden; }
+        #win { display: none; font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--rosa); margin-top: 15px; }
 
-        #yt-player { position: absolute; top: -999px; }
+        .h-float { position: fixed; bottom: -50px; animation: floatUp 3s forwards; font-size: 2rem; pointer-events: none; }
+        @keyframes floatUp { to { transform: translateY(-110vh); opacity: 0; } }
+        
+        #yt { position: absolute; top: -999px; }
     </style>
 </head>
 <body>
 
-<div class="star-bg" id="starField"></div>
-<div id="yt-player"></div>
+<div class="stars" id="starField"></div>
+<div id="yt"></div>
 
 <div id="overlay">
-    <h1 style="font-family: 'Dancing Script'; font-size: 4.5rem; color: white; margin-bottom: 10px;">Beca e Neto</h1>
-    <p style="color: rgba(255,255,255,0.8); margin-bottom: 35px;">Para todo o sempre...</p>
-    <button id="playBtn" onclick="start()">Nosso Amor 💕</button>
+    <h1 style="font-family: 'Dancing Script'; font-size: 3.5rem; color: white;">Beca e Neto</h1>
+    <button id="playBtn" onclick="startApp()">Nosso Amor 💕</button>
 </div>
 
-<div class="container" id="content">
-    <div class="caixa-contador">
-        <h2>Estamos escrevendo nossa história há...</h2>
+<div class="container" id="main">
+    <div class="timer-card">
+        <h2>Vivendo nosso sonho há...</h2>
         <div class="timer-grid">
-            <div class="time-block"><span id="aa">0</span><label>Anos</label></div>
-            <div class="time-block"><span id="mm">0</span><label>Meses</label></div>
-            <div class="time-block"><span id="dd">0</span><label>Dias</label></div>
-            <div class="time-block"><span id="hh">0</span><label>Horas</label></div>
-            <div class="time-block"><span id="minn">0</span><label>Minutos</label></div>
-            <div class="time-block"><span id="ss">0</span><label>Segundos</label></div>
+            <div class="t-unit"><span id="aa">0</span><label>Anos</label></div>
+            <div class="t-unit"><span id="mm">0</span><label>Meses</label></div>
+            <div class="t-unit"><span id="dd">0</span><label>Dias</label></div>
+            <div class="t-unit"><span id="hh">0</span><label>Horas</label></div>
+            <div class="t-unit"><span id="mi">0</span><label>Min</label></div>
+            <div class="t-unit"><span id="ss">0</span><label>Seg</label></div>
         </div>
     </div>
 
@@ -146,117 +129,105 @@
         </div>
     </div>
 
-    <button id="gameTrigger" onclick="openGame()">❤️</button>
+    <button id="btnGame" onclick="openGame()">❤️</button>
 
-    <div class="bloco-texto">
+    <div class="text-card">
         <p>Você é o meu refúgio e o meu sonho realizado. Saiba que eu te amoo dms de vdd mesmo Lembro de cada momento dessas fotos para viver com você...</p>
     </div>
 
-    <div class="bloco-texto">
+    <div class="text-card">
         <h2>Nossa Promessa ❤️</h2>
-        <p>Amor, eu te amo tanto, mas tanto mesmo, que eu faria de tudo pra ter você ao meu lado. Eu não consigo me imaginar sem você, porque você é o amor da minha vida. Eu quero continuar com você até onde Deus permitir, ou até onde você quiser… mas por mim, eu nunca vou te deixar. <br><br> Eu sonho com a gente construindo tudo juntos: casar, ter nossa família, nossa casa… eu sei que não é fácil, mas eu acredito de verdade que a gente consegue, juntos. Quero mostrar pro mundo que um amor de adolescência pode sim dar certo quando existe esforço dos dois lados. <br><br> Eu escolhi você pra minha vida. Eu não quero ninguém além de você, é só você que eu quero. E mesmo quando eu fico chateado, é porque às vezes eu sinto que você não valoriza tudo que eu faço, todo o amor e carinho que eu te dou… e isso me machuca. Mas mesmo assim, eu não desisto da gente. <br><br> Eu acredito que a gente pode melhorar, crescer juntos, aprender um com o outro. Eu sei que você tem capacidade, e eu também tenho. Me desculpa por todos os meus erros, por tudo que já te fez chorar ou te magoou. De verdade, me perdoa… eu quero ser uma pessoa melhor pra você. <br><br> Eu quero que a gente dê certo, que a gente evite brigas, que a gente se entenda mais. Porque acima de tudo isso… eu te amo demais. Isso que estamos passando é só uma fase, e eu sei que a gente vai superar. <br><br> Eu não posso te perder… você é o amor da minha vida. ❤️</p>
+        <p>Amor, eu te amo tanto, mas tanto mesmo... eu faria de tudo pra ter você ao meu lado. Sonho com a gente construindo tudo juntos: casar, ter nossa família. Escolhi você pra minha vida. Eu não posso te perder... você é o amor da minha vida. ❤️</p>
     </div>
 
-    <div class="bloco-texto">
-        <p>A melhor hora do meu dia é quando estamos conversando e também me sinto tão bem qnd te vejo e ficamos juntos slk... Um beijão do Netinho, eu te amoo Beca 💕🫶🏽</p>
+    <div class="text-card">
+        <p>A melhor hora do meu dia é quando estamos conversando. Me sinto tão bem quando te vejo. Um beijão do Netinho, eu te amoo Beca 💕🫶🏽</p>
     </div>
 </div>
 
 <div id="modalGame">
-    <h3 style="margin-bottom: 25px;">meu dia melhora quando</h3>
-    <div class="slot-area" id="slotArea">
-        <div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div>
+    <h3 style="margin-bottom: 15px;">meu dia melhora quando</h3>
+    <div class="slot-container" id="slots">
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
         <div style="width:100%"></div>
-        <div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div>
         <div style="width:100%"></div>
-        <div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div><div class="slot-box"></div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
     </div>
-    <div class="key-grid" id="keyArea"></div>
-    <div id="winMsg">Eu Te Amo ❤️💎</div>
+    <div class="keyboard" id="keys"></div>
+    <div id="win">Eu Te Amo ❤️💎</div>
+    <button onclick="document.getElementById('modalGame').style.display='none'" style="margin-top:20px; border:none; background:none; color:#999;">fechar</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
-    // Criar Estrelas
-    const field = document.getElementById('starField');
-    for (let i = 0; i < 120; i++) {
-        const s = document.createElement('div');
+    // Gerar estrelas
+    const f = document.getElementById('starField');
+    for (let i = 0; i < 80; i++) {
+        let s = document.createElement('div');
         s.className = 'star';
         s.style.left = Math.random() * 100 + 'vw';
         s.style.top = Math.random() * 100 + 'vh';
-        s.style.width = s.style.height = Math.random() * 2.5 + 'px';
-        s.style.setProperty('--d', Math.random() * 3 + 2 + 's');
-        field.appendChild(s);
+        s.style.width = s.style.height = Math.random() * 3 + 'px';
+        s.style.setProperty('--t', Math.random() * 3 + 2 + 's');
+        f.appendChild(s);
     }
 
-    var swiper = new Swiper(".mySwiper", { effect: "cards", grabCursor: true });
+    // Swiper Inicializado
+    var swiper = new Swiper(".mySwiper", { effect: "cards", grabCursor: true, loop: true });
 
     var player;
     function onYouTubeIframeAPIReady() {
-        player = new YT.Player('yt-player', {
-            videoId: 'Dwsd8SePKOs',
-            playerVars: { 'autoplay': 0, 'start': 24, 'loop': 1, 'playlist': 'Dwsd8SePKOs' }
-        });
+        player = new YT.Player('yt', { videoId: 'Dwsd8SePKOs', playerVars: { 'start': 24, 'playlist': 'Dwsd8SePKOs', 'loop': 1 } });
     }
 
-    function start() {
-        player.playVideo();
-        document.getElementById('overlay').style.opacity = '0';
-        setTimeout(() => {
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-            runTimer();
-        }, 1000);
+    function startApp() {
+        if(player && player.playVideo) player.playVideo();
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('main').style.display = 'block';
+        setInterval(updateTimer, 1000);
     }
 
-    function runTimer() {
-        const begin = new Date("2024-12-22T00:00:00");
-        setInterval(() => {
-            const now = new Date();
-            const diff = now - begin;
-            document.getElementById('aa').innerText = Math.floor(diff / 31536000000);
-            document.getElementById('mm').innerText = Math.floor((diff % 31536000000) / 2628000000);
-            document.getElementById('dd').innerText = Math.floor((diff % 2628000000) / 86400000);
-            document.getElementById('hh').innerText = Math.floor((diff % 86400000) / 3600000);
-            document.getElementById('minn').innerText = Math.floor((diff % 3600000) / 60000);
-            document.getElementById('ss').innerText = Math.floor((diff % 60000) / 1000);
-        }, 1000);
+    function updateTimer() {
+        const start = new Date("2024-12-22T00:00:00");
+        const diff = new Date() - start;
+        document.getElementById('aa').innerText = Math.floor(diff / 31536000000);
+        document.getElementById('mm').innerText = Math.floor((diff % 31536000000) / 2628000000);
+        document.getElementById('dd').innerText = Math.floor((diff % 2628000000) / 86400000);
+        document.getElementById('hh').innerText = Math.floor((diff % 86400000) / 3600000);
+        document.getElementById('mi').innerText = Math.floor((diff % 3600000) / 60000);
+        document.getElementById('ss').innerText = Math.floor((diff % 60000) / 1000);
     }
 
-    // Jogo
-    const answer = "ESTOUCOMVOCE";
-    const scrambled = ["M", "C", "O", "V", "C", "O", "Ê", "E", "S", "T", "O", "U"];
-    let hits = 0;
+    const sol = "ESTOUCOMVOCE";
+    const emb = ["M", "C", "O", "V", "C", "O", "Ê", "E", "S", "T", "O", "U"];
+    let hit = 0;
 
     function openGame() {
         document.getElementById('modalGame').style.display = 'flex';
-        const area = document.getElementById('keyArea');
-        area.innerHTML = "";
-        scrambled.forEach(l => {
+        const k = document.getElementById('keys');
+        k.innerHTML = "";
+        emb.forEach(l => {
             let b = document.createElement("button");
-            b.className = "key-btn";
-            b.innerText = l;
+            b.className = "key"; b.innerText = l;
             b.onclick = () => {
-                let lClean = l.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-                let aClean = answer[hits].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
-                if(lClean === aClean) {
-                    document.querySelectorAll('.slot-box')[hits].innerText = l;
-                    b.classList.add('used');
-                    hits++;
-                    if(hits === answer.length) {
-                        document.getElementById('winMsg').style.display = 'block';
+                let ln = l.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+                let sn = sol[hit].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase();
+                if(ln === sn) {
+                    document.querySelectorAll('.slot')[hit].innerText = l;
+                    b.classList.add('off');
+                    hit++;
+                    if(hit === sol.length) {
+                        document.getElementById('win').style.display = 'block';
                         setInterval(() => {
-                            const h = document.createElement("div");
-                            h.className = "floating-heart"; h.innerHTML = "❤️";
-                            h.style.left = Math.random() * 100 + "vw";
-                            document.body.appendChild(h);
+                            let h = document.createElement("div"); h.className = "h-float"; h.innerHTML = "❤️";
+                            h.style.left = Math.random() * 100 + "vw"; document.body.appendChild(h);
                         }, 200);
-                        setTimeout(() => document.getElementById('modalGame').style.display='none', 5000);
                     }
                 }
             };
-            area.appendChild(b);
+            k.appendChild(b);
         });
     }
 </script>
